@@ -6,8 +6,8 @@ const User = require('../models/User')
 
 const Story = require('../models/Story')
 const News = require('../models/News')
-const Student = require('../models/Student')
-const Problem = require('../models/Problem')
+const Student = require('../models/Sell')
+const Problem = require('../models/Buy')
 const Worker = require('../models/Worker')
 
 

@@ -22,8 +22,8 @@ const User = require('./models/User')
 
 const Story = require('./models/Story')
 const News = require('./models/News')
-const Student = require('./models/Student')
-const Problem = require('./models/Problem')
+const Student = require('./models/Sell')
+const Problem = require('./models/Buy')
 const Worker = require('./models/Worker')
 
 // Load config
@@ -128,15 +128,12 @@ app.use('/homeadmin', require('./routes/homeadmin'))
 app.use('/homeworker', require('./routes/homeworker'))
 app.use('/contact', require('./routes/contact'));
 app.use('/directormessage', require('./routes/directormessage'));
-app.use('/vission-and-mission', require('./routes/vission'));
-app.use('/student', require('./routes/student'));
-app.use('/worker', require('./routes/worker'));
-app.use('/problem', require('./routes/problem'));
+app.use('/vission', require('./routes/vission'));
 app.use('/privacy', require('./routes/privacy'));
 app.use('/terms', require('./routes/terms'));
-
-
-
+app.use('/sell', require('./routes/sell'));
+app.use('/buy', require('./routes/buy'));
+app.use('/worker', require('./routes/worker'));
 
 
 const PORT = process.env.PORT || 3000

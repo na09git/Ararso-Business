@@ -3,24 +3,24 @@ const { ensureAuth, ensureAdminOrWorker } = require('../middleware/auth')
 const mongoose = require('mongoose');
 const router = express.Router()
 
-const Problem = require('../models/Problem')
+const Buy = require('../models/Buy')
 
-// @desc    Show addproblem page
-// @route   GET /problem/addproblem
-router.get('/addproblem', ensureAuth, ensureAdminOrWorker, (req, res) => {
-    res.render('problem/addproblem', { title: "Problem Page" })
+// @desc    Show addbuy page
+// @route   GET /buy/addbuy
+router.get('/addbuy', ensureAuth, ensureAdminOrWorker, (req, res) => {
+    res.render('buy/addbuy', { title: "buy Page" })
 })
 
 
-// @desc    Process add problem form
-// @route   POST /problems
+// @desc    Process add buy form
+// @route   POST /buys
 router.post('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
         console.log('Received data:', req.body);
 
         req.body.user = req.user.id;
-        await Problem.create(req.body);
-        res.redirect('/problems');
+        await Buy.create(req.body);
+        res.redirect('/buys');
     } catch (err) {
         console.error(err)
         res.render('error/500')
@@ -29,17 +29,17 @@ router.post('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 });
 
 
-// @desc    Show all problem
-// @route   GET /problem
+// @desc    Show all buy
+// @route   GET /buy
 router.get('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        const problem = await Problem.find()
+        const buy = await Buy.find()
             .populate('user')
             .sort({ createdAt: -1 })
             .lean()
 
-        res.render('problem/index', {
-            problem,
+        res.render('buy/index', {
+            buy,
         })
     } catch (err) {
         console.error(err)
@@ -48,19 +48,19 @@ router.get('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
-// @desc    Show single problem
-// @route   GET /problem/:id
+// @desc    Show single buy
+// @route   GET /buy/:id
 router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        let problem = await Problem.findById(req.params.id)
+        let buy = await Buy.findById(req.params.id)
             .populate('user')
             .lean()
 
-        if (!problem) {
+        if (!buy) {
             return res.render('error/404')
         } else {
-            res.render('problem/show', {
-                problem,
+            res.render('buy/show', {
+                buy,
             })
         }
     } catch (err) {
@@ -71,18 +71,18 @@ router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 
 
 // @desc    Show edit page
-// @route   GET /problem/edit/:id
+// @route   GET /buy/edit/:id
 router.get('/edit/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        const problem = await Problem.findOne({
+        const buy = await Buy.findOne({
             _id: req.params.id,
         }).lean()
 
-        if (!problem) {
+        if (!buy) {
             return res.render('error/404')
         } else {
-            res.render('problem/edit', {
-                problem,
+            res.render('buy/edit', {
+                buy,
             })
         }
     } catch (err) {
@@ -92,25 +92,25 @@ router.get('/edit/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
-// @desc    Update problem
-// @route   PUT /problem/:id
+// @desc    Update buy
+// @route   PUT /buy/:id
 router.post('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        let problem = await Problem.findById(req.params.id).lean()
+        let buy = await Buy.findById(req.params.id).lean()
 
-        if (!problem) {
+        if (!buy) {
             return res.render('error/404')
         }
 
-        if (problem.user != req.user.id) {
-            res.redirect('/problems')
+        if (buy.user != req.user.id) {
+            res.redirect('/buys')
         } else {
-            problem = await Problem.findOneAndUpdate({ _id: req.params.id }, req.body, {
+            buy = await Buy.findOneAndUpdate({ _id: req.params.id }, req.body, {
                 new: true,
                 runValidators: true,
             })
 
-            res.redirect('/problems')
+            res.redirect('/buys')
         }
     } catch (err) {
         console.error(err)
@@ -119,21 +119,21 @@ router.post('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
-// @desc    Delete problem
-// @route   DELETE /problem/:id
+// @desc    Delete buy
+// @route   DELETE /buy/:id
 router.delete('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        let problem = await Problem.findById(req.params.id).lean();
+        let buy = await Buy.findById(req.params.id).lean();
 
-        if (!problem) {
+        if (!buy) {
             return res.render('error/404');
         }
 
-        if (problem.user != req.user.id) {
-            res.redirect('/problem');
+        if (buy.user != req.user.id) {
+            res.redirect('/buy');
         } else {
-            await Problem.deleteOne({ _id: req.params.id });
-            res.redirect('/problems');
+            await buy.deleteOne({ _id: req.params.id });
+            res.redirect('/buys');
         }
     } catch (err) {
         console.error(err);
@@ -141,33 +141,33 @@ router.delete('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     }
 });
 
-// @desc    User problem
-// @route   GET /problem/user/:userId
+// @desc    User buy
+// @route   GET /buy/user/:userId
 router.get('/user/:userId', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        const problem = await Problem.find({
+        const buy = await Buy.find({
             user: req.params.userId,
             case: 'Normal',
         })
             .populate('user')
             .lean();
 
-        res.render('problem/index', { problem });
+        res.render('buy/index', { buy });
     } catch (err) {
         console.error(err);
         res.render('error/500');
     }
 });
 
-//@desc Search problem by title
-//@route GET /problem/search/:query
+//@desc Search buy by title
+//@route GET /buy/search/:query
 router.get('/search/:query', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
-        const problem = await Problem.find({ name: new RegExp(req.params.query, 'i'), case: 'Normal' })
+        const buy = await Buy.find({ name: new RegExp(req.params.query, 'i'), case: 'Normal' })
             .populate('user')
             .sort({ createdAt: 'desc' })
             .lean();
-        res.render('problem/index', { problem });
+        res.render('buy/index', { buy });
     } catch (err) {
         console.log(err);
         res.render('error/404');
