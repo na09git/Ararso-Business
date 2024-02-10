@@ -22,8 +22,8 @@ const User = require('./models/User')
 
 const Story = require('./models/Story')
 const News = require('./models/News')
-const Student = require('./models/Sell')
-const Problem = require('./models/Buy')
+const Sell = require('./models/Sell')
+const Buy = require('./models/Buy')
 const Worker = require('./models/Worker')
 
 // Load config
@@ -116,7 +116,7 @@ app.use(function (req, res, next) {
 // Static folder
 // The express.static middleware should be placed before other middleware or route handlers that might need to handle specific routes. 
 app.use(express.static(path.join(__dirname, 'assets')))
-app.use(express.static(path.join(__dirname, 'uploadstory', 'uploadsnews', 'uploadstudent', 'uploadworker')))
+app.use(express.static(path.join(__dirname, 'uploadstory', 'uploadsnews', 'uploadbuy', 'uploadsell', 'uploadworker')))
 
 // Routes
 app.use('/', require('./routes/index'))
