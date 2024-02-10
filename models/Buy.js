@@ -1,28 +1,45 @@
 const mongoose = require('mongoose')
 
-const ProblemSchema = new mongoose.Schema({
-    name:
+const BuySchema = new mongoose.Schema({
+    buyer_name:
     {
         type: String,
         required: true,
     },
-    phone: {
+    material: {
         type: String,
+        default: 'Dinicha',
+        enum: ['Dinicha', 'Karot', 'Kurumba', 'Qayasir', 'Shunkurtaa', 'Shukaar', 'Timaatim', 'Luqqaa', 'Joniya', 'Car Material', 'Building Material', 'Other'],
     },
-    grade: {
-        type: String,
-        default: '1',
-        enum: ['kg-1', 'kg-2', 'kg-3', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-    },
-    case: {
-        type: String,
-        default: 'Normal',
-        enum: ['Normal', 'Worst'],
-    },
-    body: {
+    from_seller: {
         type: String,
         required: true,
-        trim: true,
+    },
+    Phone: {
+        type: String,
+    },
+    kilogram: {
+        type: String,
+    },
+    birr: {
+        type: String,
+        required: true,
+    },
+    note: {
+        type: String,
+    },
+    imageBase64: {
+        type: String,
+        required: true,
+    },
+    contentType: {
+        type: String,
+        required: true,
+    },
+    status: {
+        type: String,
+        default: 'Paid',
+        enum: ['Paid', 'Not-Paid'],
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -34,4 +51,4 @@ const ProblemSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Problem', ProblemSchema)
+module.exports = mongoose.model('Buy', BuySchema)

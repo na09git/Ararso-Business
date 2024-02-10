@@ -1,32 +1,26 @@
-// student Schema
 const mongoose = require('mongoose')
 
-const StudentSchema = new mongoose.Schema({
-    name: {
+const SellSchema = new mongoose.Schema({
+    Seller: {
         type: String,
         required: true,
     },
-    email: {
+    BuyerName: {
         type: String,
         trim: true,
     },
     phone: {
         type: String,
     },
-    grade: {
+    kilogram: {
         type: String,
-        default: '1',
-        enum: ['kg-1', 'kg-2', 'kg-3', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
     },
-    status: {
+    Amount: {
         type: String,
-        default: 'Paid',
-        enum: ['Paid', 'Not-Paid'],
+        required: true,
     },
-    gender: {
+    Note: {
         type: String,
-        default: 'M',
-        enum: ['M', 'F'],
     },
     imageBase64: {
         type: String,
@@ -35,6 +29,22 @@ const StudentSchema = new mongoose.Schema({
     contentType: {
         type: String,
         required: true,
+    },
+    status: {
+        type: String,
+        default: 'Paid',
+        enum: ['Paid', 'Not-Paid'],
+    },
+    imageBase64: {
+        type: String,
+        required: true,
+    },
+    contentType: {
+        type: String,
+        required: true,
+    },
+    Car_Id: {
+        type: String,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -46,4 +56,4 @@ const StudentSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Student', StudentSchema)
+module.exports = mongoose.model('Sell', SellSchema)

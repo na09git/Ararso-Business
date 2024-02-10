@@ -6,8 +6,8 @@ const User = require('../models/User')
 
 const Story = require('../models/Story')
 const News = require('../models/News')
-const Student = require('../models/Sell')
-const Problem = require('../models/Buy')
+const Sell = require('../models/Sell')
+const Buy = require('../models/Buy')
 const Worker = require('../models/Worker')
 
 
@@ -106,16 +106,16 @@ router.get('/newspage', ensureAuth, async (req, res) => {
 })
 
 
-// @desc    Student
-// @route   GET /student
-router.get('/students', ensureAuth, ensureAdmin, async (req, res) => {
+// @desc    sell
+// @route   GET /sell
+router.get('/sells', ensureAuth, ensureAdmin, async (req, res) => {
   try {
-    const student = await Student.find({ user: req.user.id }).lean()
-    res.render('students', {
+    const sell = await Sell.find({ user: req.user.id }).lean()
+    res.render('sells', {
       name: req.user.firstName,
-      student,
+      sell,
     })
-    console.log("Dear Admin, You can see all Student here in this Page !")
+    console.log("Dear Admin, You can see all Sell here in this Page !")
   } catch (err) {
     console.error(err)
     res.render('error/500')
@@ -140,16 +140,16 @@ router.get('/workers', ensureAuth, ensureAdmin, async (req, res) => {
 })
 
 
-// @desc    Problem
-// @route   GET /problem
-router.get('/problems', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+// @desc    Buy
+// @route   GET /buy
+router.get('/bought', ensureAuth, ensureAdminOrWorker, async (req, res) => {
   try {
-    const problem = await Problem.find({ user: req.user.id }).lean()
-    res.render('problems', { title: "Problem Page" }, {
+    const buy = await Buy.find({ user: req.user.id }).lean()
+    res.render('bought', { title: "Bought Page" }, {
       name: req.user.firstName,
-      problem,
+      buy,
     })
-    console.log("Dear Admin, You can see all Student Problem here in this Page !")
+    console.log("Dear Admin, You can see all  Buy here in this Page !")
   } catch (err) {
     console.error(err)
     res.render('error/500')

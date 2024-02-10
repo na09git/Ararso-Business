@@ -11,11 +11,11 @@
 <div style="padding: 60px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
 
-    {{#if student}}
+    {{#if buy}}
     {{! Define variables to store counts }}
     {{#with (hash paidCount=0 notPaidCount=0)}}
 
-    {{#each student as |row index|}}
+    {{#each buy as |row index|}}
     {{#if (eq row.status 'Paid')}}
     {{#with (hash paidCount=(inc paidCount))}}
     {{/with}}
@@ -32,13 +32,13 @@
     {{/with}}
 
     {{! Your existing table code }}
-    <table class="table table-striped w-100 table-responsive " id="data_student">
+    <table class="table table-striped w-100 table-responsive " id="data_buy">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Image</th>
-                <th>Name</th>
-                <th>E-mail</th>
+                <th>Buyer Name</th>
+                <th>Material</th>
                 <th>phone</th>
                 <th>Grade</th>
                 <th>Status</th>
@@ -49,55 +49,65 @@
         </thead>
 
         <tbody>
-            {{#each student as |row index| }}
+            {{#each buys as |row index| }}
             <tr style="text-align:center;">
                 <td style="padding: 2px;">{{index}}</td>
+                {{!-- 1 --}}
                 <td style="padding: 2px;">
                     {{#if row.imageBase64}}
                     <a href="data:{{row.contentType}};base64,{{row.imageBase64}}" data-gallery="portfolio-gallery-app"
                         class="glightbox img-fluid post-author-img flex-shrink-0">
-                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="student image"
+                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="bought image"
                             class="img-fluid" width="50">
                     </a>
                     {{else}}
                     <img src="images/no_image.png" width="50" class="img-thumbnail">
                     {{/if}}
                 </td>
-                <td style="padding: 2px;">{{row.name}}</td>
-                <td style="padding: 2px;">{{row.email}}</td>
+                {{!-- 2 --}}
+                <td style="padding: 2px;">{{row.buyer_name}}</td>
+                {{!-- 3 --}}
+                <td style="padding: 2px;">{{row.material}}</td>
+                {{!-- 4 --}}
+                <td style="padding: 2px;">{{row.from_seller}}</td>
+                {{!-- 5 --}}
                 <td style="padding: 2px;">
                     <a href="tel: {{row.phone}}"> {{row.phone}}</a>
                 </td>
-                <td style="padding: 1px;">{{row.grade}}</td>
-
+                {{!-- 6 --}}
+                <td style="padding: 1px;">{{row.kilogram}}</td>
+                {{!-- 7 --}}
+                <td style="padding: 1px;">{{row.birr}}</td>
+                {{!-- 8 --}}
+                <h6 class="title" style="padding-bottom: 10px;">
+                    <a href="/buy/{{row._id}}">
+                        <p>{{stripTags (truncate note 50)}}</p>
+                    </a>
+                </h6>
+                {{!-- 9 --}}
                 <td style="padding: 2px; 
                             {{#eq row.status 'Paid'}}background-color: #28a745; color: #fff;
                             {{else}}background-color:  #ff0000;
                             {{/eq}}">
                     <span class="dash-status">{{row.status}}</span>
                 </td>
-
-                <td style="padding: 1px; 
-                            {{#eq row.gender 'M'}}background-color: color: #ffffff;
-                            {{else}}background-color: 	#fffcb2 ;
-                            {{/eq}}">
-                    <span class="dash-gender">{{row.gender}}</span>
-                </td>
+                {{!-- 10 --}}
                 <td style="padding: 2px;">{{formatDate row.createdAt 'MMMM Do YYYY, h:mm:ss a'}} </td>
+                {{!-- 11 --}}
                 <td style="padding: 2px;">
                     <div style="display: grid; gap: 4px; grid-template-columns: repeat(3, 1fr)">
                         <div>
-                            <a href="/student/{{row._id}}" class="btn p-2 btn-float  text-primary">
+                            <a href="/buy/{{row._id}}" class="btn p-2 btn-float  text-primary">
                                 <i class="fas fa-eye fa-lg mx-1" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div>
-                            <a href="/student/edit/{{row._id}}" class="btn p-2 btn-float  text-success">
+                            <a href="/buy/edit/{{row._id}}" class="btn p-2 btn-float  text-success">
                                 <i class="fas fa-edit fa-lg mx-1"></i>
                             </a>
                         </div>
                         <div>
-                            <form action="/student/{{row._id}}" method="POST" id="delete-form">
+                            <form action="/buy/{{row._id}}" method="POST" id="delete-form">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn text-danger">
                                     <i class="fas fa-trash fa-lg mx-1"></i>
@@ -112,6 +122,6 @@
     </table>
 
     {{else}}
-    <p>No student Added yet</p>
+    <p>No Bought Added yet</p>
     {{/if}}
 </div>

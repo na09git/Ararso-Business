@@ -1,13 +1,10 @@
-<div class="w-100">
-    {{> _studentheader}}
-</div>
-
 <div class="row" style="padding: 100px; ">
     <div class="col-3">
-        <h3 class="display-6 " style=" padding-top:35px; padding-bottom:20px; padding-left:30px;">Students</h3>
+        <h3 class="display-6 " style=" padding-top:35px; padding-bottom:20px; padding-left:30px;">buys</h3>
     </div>
+
     <div class="col">
-        <form id="search-site" action='/student/search/:query' method='get' class="mb-4"
+        <form id="search-site" action='/buy/search/:query' method='get' class="mb-4"
             style="padding-left: 100px; padding-right: 100px;">
             <div class="input-group" style="padding-top: 30px;">
                 <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
@@ -23,46 +20,61 @@
 
 
     <div class="row" style="padding-bottom: 30px; padding-left: 30px; padding-right: 30px;">
-        {{#each student as |row index| }}
+        {{#each buys as |row index| }}
         <div class="col-12 col-md-4">
             <div class="card mb-4">
                 <div class="card-img-top">
-                    <a href="/student/edit/{{row._id}}" class="btn p-2 btn-float  text-success">
+                    <a href="/buy/edit/{{row._id}}" class="btn p-2 btn-float  text-success">
                         <i class="fas fa-edit fa-lg mx-1"></i>
                     </a>
                 </div>
                 <div class="card ">
                     {{#if imageBase64}}
-                    <img src='data:{{contentType}};base64,{{imageBase64}}' width="auto" height="230"
-                        class="student image">
+                    <img src='data:{{contentType}};base64,{{imageBase64}}' width="auto" height="230" class="buy image">
                     {{else}}
                     <img src="images/no_image.png" width="auto" height="230" class="img-thumbnail">
                     {{/if}}
                 </div>
 
                 <div class="card-body text-center">
-                    <h6 class="card-title">{{name}}</h6>
-                    <h6 class="card-title">{{email}}</h6>
+                    {{!-- 1 --}}
+                    <h6 class="card-title">{{buyer_name}}</h6>
+                    {{!-- 2 --}}
+                    <h6 class="card-title">{{material}}</h6>
+                    {{!-- 3 --}}
+                    <h6 class="card-title">{{from_seller}}</h6>
+                    {{!-- 4 --}}
                     <h6 class="card-title">
-                        <a href="tel: {{row.phone}}"> {{row.phone}}</a>
+                        <a href="tel: {{phone}}"> {{phone}}</a>
                     </h6>
+                    {{!-- 5 --}}
+                    <h6 class="card-title">{{kilogram}}</h6>
+                    {{!-- 6 --}}
+                    <h6 class="card-title">{{birr}}</h6>
+                    {{!-- 7 --}}
+                    <h6 class="title" style="padding-bottom: 10px;">
+                        <a href="/buy/{{row._id}}">
+                            <p>{{stripTags (truncate note 50)}}</p>
+                        </a>
+                    </h6>
+                    {{!-- 8 --}}
                     <h6 class="card-title">{{status}}</h6>
-                    <h6 class="card-title">{{gender}}</h6>
-
+                    {{!-- 9 --}}
                     <div class="chip gap-0 ">
                         <img style="height: 35px; weight: 35px;" class="chip-img rounded"
                             src="data:{{contentType}};base64,{{imageBase64}}" alt="{{row.image}}">
                         <a style="text-decoration: none; background-color:#e9e0e0; border-radius:20px; padding-top:6px; padding-bottom:8px; padding-left:20px; padding-right:20px;"
                             href="mailto: {{row.email}}" class="chip-link">{{row.email}}</a>
                     </div>
+
                 </div>
                 <div class="card-footer text-center">
-                    <a href="/student/{{row._id}}" class="btn btn-secondary">Read More</a>
+                    <a href="/buy/{{row._id}}" class="btn btn-secondary">Read More</a>
                 </div>
             </div>
         </div>
         {{else}}
-        <p class="col-12 text-center">No Student to display!</p>
+        <p class="col-12 text-center">No Bought to display!</p>
         {{/each}}
     </div>
 </div>

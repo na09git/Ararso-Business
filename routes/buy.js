@@ -1,56 +1,95 @@
-const express = require('express')
-const { ensureAuth, ensureAdminOrWorker } = require('../middleware/auth')
-const mongoose = require('mongoose');
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const multer = require('multer');
+const fs = require('fs');
+const { ensureAuth, ensureAdmin } = require('../middleware/auth')
 
-const Buy = require('../models/Buy')
+const Buy = require('../models/Buy');
 
-// @desc    Show addbuy page
-// @route   GET /buy/addbuy
-router.get('/addbuy', ensureAuth, ensureAdminOrWorker, (req, res) => {
-    res.render('buy/addbuy', { title: "buy Page" })
-})
-
-
-// @desc    Process add buy form
-// @route   POST /buys
-router.post('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
-    try {
-        console.log('Received data:', req.body);
-
-        req.body.user = req.user.id;
-        await Buy.create(req.body);
-        res.redirect('/buys');
-    } catch (err) {
-        console.error(err)
-        res.render('error/500')
+// Set up multer storage
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploadbuy');
+    },
+    filename: function (req, file, cb) {
+        var ext = file.originalname.substr(file.originalname.lastIndexOf('.'));
+        cb(null, file.fieldname + '-' + Date.now() + ext);
     }
+});
 
+const upload = multer({ storage: storage });
+
+
+// @desc Show add buy page
+// @route GET /buy/addbuy
+router.get('/addbuy', ensureAuth, ensureAdmin, (req, res) => {
+    res.render('buy/addbuy', { title: 'Buy Page' });
 });
 
 
-// @desc    Show all buy
-// @route   GET /buy
-router.get('/', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+// @desc Process add buy form with image upload
+// @route POST /buy
+router.post('/', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
+    try {
+        const file = req.file;
+
+        if (!file || file.length === 0) {
+            const error = new Error('Please choose files');
+            error.httpStatusCode = 400;
+            throw error;
+        }
+
+        const img = fs.readFileSync(file.path);
+        const encode_image = img.toString('base64');
+
+        const newUpload = new Buy({
+            ...req.body,
+            user: req.user.id,
+            contentType: file.mimetype,
+            imageBase64: encode_image,
+        });
+
+        try {
+            await newUpload.save();
+            res.redirect('/bought');
+            console.log("New buy with image/upload is Registered");
+
+        } catch (error) {
+            if (error.name === 'MongoError' && error.code === 11000) {
+                return res.status(400).json({ error: `Duplicate ${file.originalname}. File Already exists! ` });
+            }
+            return res.status(500).json({ error: error.message || `Cannot Upload ${file.originalname} Something Missing!` });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message || 'Internal Server Error' });
+    }
+});
+
+
+// @desc Show all buys
+// @route GET /buy/index
+router.get('/', ensureAuth, ensureAdmin, async (req, res) => {
     try {
         const buy = await Buy.find()
             .populate('user')
             .sort({ createdAt: -1 })
-            .lean()
+            .lean();
 
         res.render('buy/index', {
             buy,
-        })
+        });
+        console.log("You can now see All Buy Here !");
     } catch (err) {
-        console.error(err)
-        res.render('error/500')
+        console.error(err);
+        res.render('error/500');
     }
-})
+});
 
 
 // @desc    Show single buy
 // @route   GET /buy/:id
-router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
     try {
         let buy = await Buy.findById(req.params.id)
             .populate('user')
@@ -58,11 +97,16 @@ router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 
         if (!buy) {
             return res.render('error/404')
+        }
+
+        if (buy.user._id != req.user.id) {
+            res.render('error/404')
         } else {
             res.render('buy/show', {
                 buy,
             })
         }
+        console.log("You can now see the buy details");
     } catch (err) {
         console.error(err)
         res.render('error/404')
@@ -70,58 +114,89 @@ router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
-// @desc    Show edit page
-// @route   GET /buy/edit/:id
-router.get('/edit/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+
+// @desc Show edit page
+// @route GET /buy/edit/:id
+router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
     try {
-        const buy = await Buy.findOne({
-            _id: req.params.id,
-        }).lean()
+        const buy = await Buy.findById(req.params.id).lean();
 
         if (!buy) {
-            return res.render('error/404')
+            return res.render('error/404');
+        }
+
+        if (buy.user.toString() !== req.user.id) {
+            return res.redirect('/bought');
         } else {
             res.render('buy/edit', {
                 buy,
-            })
+            });
         }
+        console.log("You are in buy/edit page & can Edit this buy info");
     } catch (err) {
-        console.error(err)
-        return res.render('error/500')
+        console.error(err);
+        return res.render('error/500');
     }
-})
+});
 
 
-// @desc    Update buy
-// @route   PUT /buy/:id
-router.post('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+// @desc Show Update page
+// @route POST /buy/:id
+router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
     try {
-        let buy = await Buy.findById(req.params.id).lean()
+        let buy = await Buy.findById(req.params.id).lean();
 
         if (!buy) {
-            return res.render('error/404')
+            console.log('buy not found');
+            return res.render('error/404');
         }
 
-        if (buy.user != req.user.id) {
-            res.redirect('/buys')
+        if (String(buy.user) !== req.user.id) {
+            console.log('User not authorized');
+            return res.redirect('/bought');
+        }
+
+        const file = req.file;
+        const existingImage = buy.imageBase64;
+
+        let updatedFields = req.body;
+
+        if (file) {
+            const img = fs.readFileSync(file.path);
+            const encode_image = img.toString('base64');
+            updatedFields = {
+                ...updatedFields,
+                contentType: file.mimetype,
+                imageBase64: encode_image,
+            };
         } else {
-            buy = await Buy.findOneAndUpdate({ _id: req.params.id }, req.body, {
-                new: true,
-                runValidators: true,
-            })
-
-            res.redirect('/buys')
+            updatedFields = {
+                ...updatedFields,
+                contentType: buy.contentType,
+                imageBase64: existingImage,
+            };
         }
+
+        // Use await here
+        buy = await Buy.findOneAndUpdate(
+            { _id: req.params.id },
+            updatedFields,
+            { new: true, runValidators: true }
+        );
+
+        console.log('buy updated successfully');
+        res.redirect('/bought');
     } catch (err) {
-        console.error(err)
-        return res.render('error/500')
+        console.error(err);
+        return res.render('error/500');
     }
-})
+});
 
 
-// @desc    Delete buy
-// @route   DELETE /buy/:id
-router.delete('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+
+// @desc Delete buy
+// @route DELETE /buy/:id
+router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
     try {
         let buy = await Buy.findById(req.params.id).lean();
 
@@ -130,48 +205,55 @@ router.delete('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
         }
 
         if (buy.user != req.user.id) {
-            res.redirect('/buy');
+            res.redirect('/bought');
         } else {
             await buy.deleteOne({ _id: req.params.id });
-            res.redirect('/buys');
+            res.redirect('/bought');
         }
+        console.log("buy Deleted Successfully !");
+
     } catch (err) {
         console.error(err);
         return res.render('error/500');
     }
 });
 
-// @desc    User buy
-// @route   GET /buy/user/:userId
-router.get('/user/:userId', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+
+
+// @desc User buy
+// @route GET /buy/user/:userId
+router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
     try {
         const buy = await Buy.find({
             user: req.params.userId,
-            case: 'Normal',
-        })
-            .populate('user')
-            .lean();
+        }).populate('user').lean();
 
-        res.render('buy/index', { buy });
+        res.render('buy/index', {
+            buy,
+        });
     } catch (err) {
         console.error(err);
         res.render('error/500');
     }
 });
 
+
+
 //@desc Search buy by title
 //@route GET /buy/search/:query
-router.get('/search/:query', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+router.get('/search/:query', ensureAuth, ensureAdmin, async (req, res) => {
     try {
-        const buy = await Buy.find({ name: new RegExp(req.params.query, 'i'), case: 'Normal' })
+        const buy = await Buy.find({ name: new RegExp(req.query.query, 'i') })
             .populate('user')
             .sort({ createdAt: 'desc' })
             .lean();
         res.render('buy/index', { buy });
+        console.log("Search is working !");
     } catch (err) {
         console.log(err);
         res.render('error/404');
     }
 });
+
 
 module.exports = router;
