@@ -1,0 +1,114 @@
+<!-- ====== Breadcrumbs ====== -->
+<div class="breadcrumbs">
+  <div class="page-header d-flex align-items-center">
+    <div class="container position-relative">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6 text-center">
+          <h2>Friends Events</h2>
+          <p>You can get Events of Bilal Family here </p>
+          <p>Be part of them by sharing your Event Dear :{{user.firstName}}.</p>
+        </div>
+      </div>
+
+      <div class="col-md-3  text-center " style="padding-top: 42px; justify-content-center">
+        <a href="/stories" class="btn bg-primary text-white"> Stories
+          dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>Events</li>
+        <div class="col-md-6 w-100">
+
+          {{!-- search --}}
+          <form id="search-site" action='/story/search/:query' method='get' class="row mb-4">
+            <div class="col input-group" style="padding-top: 30px;">
+              <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
+              <div class="form-floating">
+                <input id="search" type="search" name='query' class="form-control" placeholder="Search by title">
+                <label for="search">Search</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+            {{!-- Broadcast --}}
+            <div class="col-md-3" style="padding-top: 42px;">
+              <a href="/story/add" class="btn bg-primary text-white">Post Story</a>
+            </div>
+            {{!-- Broadcast --}}
+          </form>
+          {{!-- search --}}
+
+        </div>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!--- End Breadcrumbs --->
+
+
+
+<main id="main">
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up" style="height: auto;">
+      {{#each story as |row index| }}
+      <div class="row gy-6 posts-list d-flex justify-content-center">
+        <div class="col-xl-7 col-md-8">
+          <article style="max-height: 1000px; overflow: hidden;">
+            {{!-- Author --}}
+            <div class="d-flex align-items-center">
+              {{!-- Circle image of poster--}}
+              <img src="{{user.image}}" alt=" image of {{user.image}}" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta row w-100">
+                {{!-- firstName --}}
+                <div class="col-3">
+                  <a style="text-decoration: none;" href="mailto: {{user.email}}" class="chip-link ">
+                    <p class="post-author-list">{{user.firstName}}</p>
+                  </a>
+                </div>
+                {{!-- Posted Date --}}
+                <p class="post-date col w-100">
+                  <time datetime="2022-01-01"> {{formatDate story.createdAt 'MMMM Do YYYY, h:mm:ss a'}}</time>
+                </p>
+              </div>
+            </div>
+            {{!-- title --}}
+            <p class="post-category" style="padding-top: 15px;">{{title}}</p>
+            {{!-- Body --}}
+            <h6 class="title" style="padding-bottom: 10px;">
+              <a href="/story/{{row._id}}">
+                <p>{{stripTags (truncate body 250)}}</p>
+              </a>
+            </h6>
+            {{!-- image --}}
+            <div class="post-img" style="object-fit: cover; height: 660%;">
+
+              <a href="data:{{contentType}};base64,{{imageBase64}}" data-gallery="portfolio-gallery-app"
+                class="glightbox img-fluid post-author-img flex-shrink-0">
+                <img src="data:{{contentType}};base64,{{imageBase64}}" width="100%" style="height: 100%;"
+                  alt="story image" class="img-fluid">
+              </a>
+            </div>
+            {{!-- Read More --}}
+            <div class="card-footer text-center ">
+              <a href="/story/{{row._id}}" class="btn btn-secondary">Read More</a>
+            </div>
+          </article>
+        </div>
+        <!-- End post list item -->
+      </div>
+      {{else}}
+      <p class="col-12 text-center">No Event posted yet .</p>
+      <p class="col-12 text-center">Be the first to post an Event !</p>
+      {{/each}}
+    </div>
+    <!-- End blog posts list -->
+  </section>
+  <!-- End Blog Section -->
+
+</main>
+<!-- End #main -->
