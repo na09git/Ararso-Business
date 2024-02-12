@@ -18,6 +18,7 @@ router.get('/home', (req, res) => {
   }
 })
 
+
 // @route   GET /home
 router.get('/', (req, res) => {
   try {

@@ -15,7 +15,7 @@ const BuySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Phone: {
+    phone: {
         type: String,
     },
     kilogram: {
@@ -25,7 +25,7 @@ const BuySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    note: {
+    body: {
         type: String,
     },
     imageBase64: {

@@ -1,34 +1,31 @@
 const mongoose = require('mongoose')
 
 const SellSchema = new mongoose.Schema({
-    Seller: {
+    seller: {
         type: String,
         required: true,
     },
-    BuyerName: {
+    buyer_name: {
         type: String,
-        trim: true,
+        required: true,
     },
-    phone: {
+    material: {
         type: String,
+        default: 'Dinicha',
+        enum: ['Dinicha', 'Karot', 'Kurumba', 'Qayasir', 'Shunkurtaa', 'Shukaar', 'Timaatim', 'Luqqaa', 'Joniya', 'Other'],
     },
     kilogram: {
         type: String,
     },
-    Amount: {
+    birr: {
         type: String,
         required: true,
     },
-    Note: {
+    body: {
         type: String,
     },
-    imageBase64: {
+    phone: {
         type: String,
-        required: true,
-    },
-    contentType: {
-        type: String,
-        required: true,
     },
     status: {
         type: String,
@@ -43,7 +40,7 @@ const SellSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Car_Id: {
+    car_id: {
         type: String,
     },
     user: {

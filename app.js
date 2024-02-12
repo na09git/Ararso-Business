@@ -8,7 +8,7 @@ const methodOverride = require('method-override');
 const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session);
-const connectDB = require('./config/db')
+const connectDB = require('./config/db');
 const multer = require('multer');
 const handlebarsHelpers = require('handlebars-helpers')();
 const base64Helper = (data) => new handlebars.SafeString(data.toString('base64'));
@@ -115,8 +115,8 @@ app.use(function (req, res, next) {
 
 // Static folder
 // The express.static middleware should be placed before other middleware or route handlers that might need to handle specific routes. 
-app.use(express.static(path.join(__dirname, 'assets')))
-app.use(express.static(path.join(__dirname, 'uploadstory', 'uploadsnews', 'uploadbuy', 'uploadsell', 'uploadworker')))
+app.use(express.static(path.join(__dirname, 'assets2')))
+app.use(express.static(path.join(__dirname, 'uploadstory', 'uploadnews', 'uploadbuy', 'uploadsell', 'uploadworker')))
 
 // Routes
 app.use('/', require('./routes/index'))
@@ -124,7 +124,7 @@ app.use('/auth', require('./routes/auth'))
 app.use('/story', require('./routes/story'))
 app.use('/news', require('./routes/news'));
 app.use('/home', require('./routes/home'))
-app.use('/homeadmin', require('./routes/homeadmin'))
+app.use('/admin', require('./routes/admin'))
 app.use('/homeworker', require('./routes/homeworker'))
 app.use('/contact', require('./routes/contact'));
 app.use('/directormessage', require('./routes/directormessage'));
@@ -134,6 +134,9 @@ app.use('/terms', require('./routes/terms'));
 app.use('/sell', require('./routes/sell'));
 app.use('/buy', require('./routes/buy'));
 app.use('/worker', require('./routes/worker'));
+app.use('/profile', require('./routes/profile'));
+app.use('/register', require('./routes/register'));
+app.use('/rent', require('./routes/rent'));
 
 
 const PORT = process.env.PORT || 3000

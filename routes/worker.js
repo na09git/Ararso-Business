@@ -23,7 +23,11 @@ const upload = multer({ storage: storage });
 // @desc Show add worker page
 // @route GET /worker/addworker
 router.get('/addworker', ensureAuth, ensureAdmin, (req, res) => {
-    res.render('worker/addworker', { title: 'Worker Page' });
+    res.render('worker/addworker', {
+        title: 'Worker Page',
+        layout: 'admin',
+    }
+    );
 });
 
 
@@ -76,6 +80,7 @@ router.get('/', ensureAuth, ensureAdmin, async (req, res) => {
 
         res.render('worker/index', {
             worker,
+            layout: 'admin',
         });
     } catch (err) {
         console.error(err);
@@ -101,6 +106,7 @@ router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
         } else {
             res.render('worker/show', {
                 worker,
+                layout: 'admin',
             })
         }
     } catch (err) {
@@ -125,7 +131,10 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
             return res.redirect('/workers');
         }
 
-        res.render('worker/edit', { worker });
+        res.render('worker/edit', {
+            worker
+            , layout: 'admin',
+        });
     } catch (err) {
         console.error(err);
         return res.render('error/500');
@@ -178,7 +187,9 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
         );
 
         console.log('worker updated successfully');
-        res.redirect('/workers');
+        res.redirect('/workers', {
+            layout: 'admin',
+        });
     } catch (err) {
         console.error(err);
         return res.render('error/500');
@@ -198,10 +209,14 @@ router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
         }
 
         if (worker.user != req.user.id) {
-            res.redirect('/workers');
+            res.redirect('/workers', {
+                layout: 'admin',
+            });
         } else {
             await Worker.deleteOne({ _id: req.params.id });
-            res.redirect('/workers');
+            res.redirect('/workers', {
+                layout: 'admin',
+            });
         }
     } catch (err) {
         console.error(err);
@@ -221,6 +236,7 @@ router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
 
         res.render('worker/index', {
             worker,
+            layout: 'admin',
         });
     } catch (err) {
         console.error(err);
@@ -238,7 +254,10 @@ router.get('/search/:query', ensureAuth, ensureAdmin, async (req, res) => {
             .populate('user')
             .sort({ createdAt: 'desc' })
             .lean();
-        res.render('worker/index', { worker });
+        res.render('worker/index', {
+            worker,
+            layout: 'admin',
+        });
     } catch (err) {
         console.log(err);
         res.render('error/404');

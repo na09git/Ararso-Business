@@ -1,7 +1,3 @@
-<div class="w-100" style="position: fixed; z-index: 100; ">
-    {{> _workerheader}}
-</div>
-
 <div class="container" style="padding-top: 85px; padding-bottom: 20px;">
     <div class="row">
         <div class="col-md-8" style="padding-right: 50px; padding-left: 50px;">
@@ -47,14 +43,6 @@
                     <div class="p-2" style="padding-left: 50px;">
                         <span>◇ Salary : </span>
                         <span style="padding-left: 40px;">{{worker.salary}}</span>
-                    </div>
-                    {{!-- gender --}}
-                    <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Gender :</span>
-                        <span
-                            style="{{#eq worker.gender 'M'}}color: #28a745;{{else}}{{#eq worker.gender 'F'}}color: #ff69b4;{{/eq}}{{/eq}}; padding-left: 40px;">
-                            {{worker.gender}}
-                        </span>
                     </div>
                     {{!-- Registered Date --}}
                     <div class="p-2" style="padding-left: 50px;">

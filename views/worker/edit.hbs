@@ -1,7 +1,3 @@
-<div class="w-100" style="z-index: 99; ">
-    {{> _workerheader}}
-</div>
-
 <div class="container row " style="padding-top: 25px; padding-right:10%; padding-left:310px;">
     <div class=" bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
         style="padding-top: 20px; padding-right:10%; padding-left:10%;">
@@ -79,19 +75,8 @@
                         <input type="text" class="form-control " id="salary" name="salary" value="{{worker.salary}}">
                     </div>
                 </div>
-                <!-- 6 gender --->
-                <div class="mb-2 row">
-                    <div class="col-3">
-                        <label for="gender" class="form-label">Gender :</label>
-                    </div>
-                    <div class="col">
-                        <select class="form-select" id="gender" name="gender">
-                            <option value="M" {{#if (eq worker.gender 'M' )}}selected{{/if}}>M</option>
-                            <option value="F" {{#if (eq worker.gender 'F' )}}selected{{/if}}>F</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- 7 Image--->
+
+                <!-- 6 Image--->
                 <div class="mb-2 row">
                     <div class="col-3">
                         <label for="image" class="form-label">Change Image :</label>

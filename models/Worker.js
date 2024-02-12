@@ -16,16 +16,11 @@ const WorkerSchema = new mongoose.Schema({
     },
     position: {
         type: String,
-        default: 'Teacher',
-        enum: ['Teacher', 'Manager', 'Ustaz', 'Cleaner', 'Security', 'Driver', 'Cashier', 'Director', 'IT-Technician'],
+        default: 'Worker',
+        enum: ['Worker', 'Partner', 'Children', 'Wife', 'Driver', 'Security', 'Cashier', 'Director'],
     },
     salary: {
         type: String,
-    },
-    gender: {
-        type: String,
-        default: 'M',
-        enum: ['M', 'F'],
     },
     imageBase64: {
         type: String,

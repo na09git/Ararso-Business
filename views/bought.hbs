@@ -1,101 +1,102 @@
+<!-- Include jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<!-- Include DataTables -->
+<script src="path/to/jquery.dataTables.min.js"></script>
+
 <title>Bought Page</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css"
     integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
 <div>
-    {{> _createbuy}}
+    {{> _addbuy}}
 </div>
 
-{{!-- body --}}
-<div style="padding: 60px;">
+<div style="padding: 10px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
+    <p style="padding-left: 250px;">This Are bought Materials List</p>
+
+    <p style="padding-left: 20px"> This Are Number of Paid Vs Not-Paid </p>
+
+    <!-- Add these h6 tags where you want to display the counts -->
+    <span style="color: red;">|</span>
+    <h6 id="paidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="notPaidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="totalBirr"></h6> <!-- Display total Birr amount here -->
 
     {{#if buy}}
-    {{! Define variables to store counts }}
-    {{#with (hash paidCount=0 notPaidCount=0)}}
-
-    {{#each buy as |row index|}}
-    {{#if (eq row.status 'Paid')}}
-    {{#with (hash paidCount=(inc paidCount))}}
-    {{/with}}
-    {{else}}
-    {{#with (hash notPaidCount=(inc notPaidCount))}}
-    {{/with}}
-    {{/if}}
-    {{/each}}
-
-    {{! Display the counts }}
-    <p>Paid: {{paidCount}}</p>
-    <p>Not-Paid: {{notPaidCount}}</p>
-
-    {{/with}}
-
     {{! Your existing table code }}
     <table class="table table-striped w-100 table-responsive " id="data_buy">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>No.</th>
                 <th>Image</th>
-                <th>Buyer Name</th>
+                <th>Buyer</th>
                 <th>Material</th>
-                <th>phone</th>
-                <th>Grade</th>
+                <th>From_buyer</th>
+                <th>Phone</th>
+                <th>Kilogram</th>
+                <th>Birr</th>
                 <th>Status</th>
-                <th>Gender</th>
-                <th>Date</th>
-                <th>Action</th>
+                <th class="text-center">Note</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
 
         <tbody>
-            {{#each buys as |row index| }}
-            <tr style="text-align:center;">
-                <td style="padding: 2px;">{{index}}</td>
-                {{!-- 1 --}}
+            {{#each buy as |row index|}}
+            <tr>
+                {{!-- 1 Index --}}
+                <td style="padding: 2px;" class="text-center">{{index}}</td>
+                {{!-- 2 Image --}}
                 <td style="padding: 2px;">
                     {{#if row.imageBase64}}
                     <a href="data:{{row.contentType}};base64,{{row.imageBase64}}" data-gallery="portfolio-gallery-app"
                         class="glightbox img-fluid post-author-img flex-shrink-0">
-                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="bought image"
+                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="sell image"
                             class="img-fluid" width="50">
                     </a>
                     {{else}}
                     <img src="images/no_image.png" width="50" class="img-thumbnail">
                     {{/if}}
                 </td>
-                {{!-- 2 --}}
+                {{!-- 3 buyer_name --}}
                 <td style="padding: 2px;">{{row.buyer_name}}</td>
-                {{!-- 3 --}}
+                {{!-- 4 material --}}
                 <td style="padding: 2px;">{{row.material}}</td>
-                {{!-- 4 --}}
+                {{!-- 5 from_seller --}}
                 <td style="padding: 2px;">{{row.from_seller}}</td>
-                {{!-- 5 --}}
+                {{!-- 6 phone --}}
+                <td style="padding: 2px;">{{row.phone}}</td>
+                {{!-- 7 kilogram --}}
+                <td style="padding: 2px;">{{row.kilogram}}</td>
+                {{!-- 8 birr --}}
+                <td style="padding: 2px;">{{row.birr}}</td>
+                {{!-- 9 status --}}
                 <td style="padding: 2px;">
-                    <a href="tel: {{row.phone}}"> {{row.phone}}</a>
+                    <h6 class="card-title p-2 d-block " style="align-items:center;padding-left: 50px; padding-right: 40px;
+                        {{#eq row.status 'Paid'}}background-color: #9EE47E;width: 100px;
+                        {{else}}background-color: #FF3232; width: 100px;
+                        {{/eq}}">
+                        <span class="dash-gender text-center">
+                            {{row.status}}
+                        </span>
+                    </h6>
                 </td>
-                {{!-- 6 --}}
-                <td style="padding: 1px;">{{row.kilogram}}</td>
-                {{!-- 7 --}}
-                <td style="padding: 1px;">{{row.birr}}</td>
-                {{!-- 8 --}}
-                <h6 class="title" style="padding-bottom: 10px;">
-                    <a href="/buy/{{row._id}}">
-                        <p>{{stripTags (truncate note 50)}}</p>
-                    </a>
-                </h6>
-                {{!-- 9 --}}
-                <td style="padding: 2px; 
-                            {{#eq row.status 'Paid'}}background-color: #28a745; color: #fff;
-                            {{else}}background-color:  #ff0000;
-                            {{/eq}}">
-                    <span class="dash-status">{{row.status}}</span>
+                {{!-- 8 note --}}
+                <td style="padding: 2px;"> {{stripTags (truncate row.note 50)}}</td>
+
+                {{!-- 12 Date --}}
+                <td style="padding: 2px;" class="text-center">{{formatDate row.createdAt 'MMMM Do YYYY, h:mm:ss a'}}
                 </td>
-                {{!-- 10 --}}
-                <td style="padding: 2px;">{{formatDate row.createdAt 'MMMM Do YYYY, h:mm:ss a'}} </td>
-                {{!-- 11 --}}
+                {{!-- 13 Action --}}
                 <td style="padding: 2px;">
-                    <div style="display: grid; gap: 4px; grid-template-columns: repeat(3, 1fr)">
+                    <div style="display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr)">
                         <div>
                             <a href="/buy/{{row._id}}" class="btn p-2 btn-float  text-primary">
                                 <i class="fas fa-eye fa-lg mx-1" aria-hidden="true"></i>
@@ -109,7 +110,7 @@
                         <div>
                             <form action="/buy/{{row._id}}" method="POST" id="delete-form">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn text-danger">
+                                <button type="submit" class="btn text-danger" style="z-index: 100;">
                                     <i class="fas fa-trash fa-lg mx-1"></i>
                                 </button>
                             </form>
@@ -122,6 +123,33 @@
     </table>
 
     {{else}}
-    <p>No Bought Added yet</p>
+    <p>No Bought to Display !</p>
     {{/if}}
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        // Count the number of paid and not-paid entries
+        var paidCount = 0;
+        var notPaidCount = 0;
+        var totalBirr = 0;
+
+        $("#data_buy tbody tr").each(function () {
+            var status = $(this).find("td:eq(8)").text().trim(); // Assuming status is the 9th column (index 8)
+            if (status === "Paid") {
+                paidCount++;
+            } else {
+                notPaidCount++;
+            }
+
+            var birr = parseFloat($(this).find("td:eq(7)").text().trim()); // Assuming birr is the 8th column (index 7)
+            totalBirr += birr;
+        });
+
+        // Display the counts and total Birr amount using h6 tags
+        $("#paidCount").text("Paid: " + paidCount);
+        $("#notPaidCount").text("Not Paid: " + notPaidCount);
+        $("#totalBirr").text("Total Amount (Birr): " + totalBirr.toFixed(2)); // Assuming you want to display total with 2 decimal places
+    });
+</script>

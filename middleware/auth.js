@@ -94,7 +94,7 @@ async function isWorkerUser(googleId) {
     const worker = await Worker.findOne({ user: { googleId: googleId } });
 
     // Check if the worker exists and has a valid position
-    return worker && worker.position && ['Teacher', 'Manager', 'Ustaz', 'Cleaner', 'Security', 'Driver', 'Cashier', 'Director', 'IT-Technician'].includes(worker.position);
+    return worker && worker.position && ['Worker', 'Children', 'Partner', 'Driver', 'Security', 'Cashier', 'Director', 'Wife'].includes(worker.position);
   } catch (error) {
     console.error(error);
     return false;

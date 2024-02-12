@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
-const { ensureAuth, ensureAdmin } = require('../middleware/auth')
+const { ensureAuth, ensureAdmin, ensureAdminOrWorker } = require('../middleware/auth')
 
 const Buy = require('../models/Buy');
 
@@ -22,14 +22,17 @@ const upload = multer({ storage: storage });
 
 // @desc Show add buy page
 // @route GET /buy/addbuy
-router.get('/addbuy', ensureAuth, ensureAdmin, (req, res) => {
-    res.render('buy/addbuy', { title: 'Buy Page' });
+router.get('/addbuy', ensureAuth, ensureAdminOrWorker, (req, res) => {
+    res.render('buy/addbuy', {
+        title: 'Buy Page',
+        layout: 'admin',
+    });
 });
 
 
 // @desc Process add buy form with image upload
 // @route POST /buy
-router.post('/', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
+router.post('/', ensureAuth, ensureAdminOrWorker, upload.single('image'), async (req, res) => {
     try {
         const file = req.file;
 
@@ -77,6 +80,7 @@ router.get('/', ensureAuth, ensureAdmin, async (req, res) => {
             .lean();
 
         res.render('buy/index', {
+            layout: 'admin',
             buy,
         });
         console.log("You can now see All Buy Here !");
@@ -104,6 +108,7 @@ router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
         } else {
             res.render('buy/show', {
                 buy,
+                layout: 'admin',
             })
         }
         console.log("You can now see the buy details");
@@ -117,7 +122,7 @@ router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc Show edit page
 // @route GET /buy/edit/:id
-router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/edit/:id', ensureAuth, async (req, res) => {
     try {
         const buy = await Buy.findById(req.params.id).lean();
 
@@ -126,10 +131,13 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
         }
 
         if (buy.user.toString() !== req.user.id) {
-            return res.redirect('/bought');
+            return res.redirect('/bought', {
+                layout: 'admin',
+            });
         } else {
             res.render('buy/edit', {
                 buy,
+                layout: 'admin',
             });
         }
         console.log("You are in buy/edit page & can Edit this buy info");
@@ -142,7 +150,7 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc Show Update page
 // @route POST /buy/:id
-router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
+router.post('/:id', ensureAuth, upload.single('image'), async (req, res) => {
     try {
         let buy = await Buy.findById(req.params.id).lean();
 
@@ -153,7 +161,9 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
 
         if (String(buy.user) !== req.user.id) {
             console.log('User not authorized');
-            return res.redirect('/bought');
+            return res.redirect('/buy'), {
+                layout: 'admin',
+            }
         }
 
         const file = req.file;
@@ -185,7 +195,7 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
         );
 
         console.log('buy updated successfully');
-        res.redirect('/bought');
+        res.redirect('/buy');
     } catch (err) {
         console.error(err);
         return res.render('error/500');
@@ -196,7 +206,7 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
 
 // @desc Delete buy
 // @route DELETE /buy/:id
-router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
+router.delete('/:id', ensureAuth, async (req, res) => {
     try {
         let buy = await Buy.findById(req.params.id).lean();
 
@@ -208,7 +218,9 @@ router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
             res.redirect('/bought');
         } else {
             await buy.deleteOne({ _id: req.params.id });
-            res.redirect('/bought');
+            res.redirect('/bought'), {
+                layout: 'admin',
+            }
         }
         console.log("buy Deleted Successfully !");
 
@@ -222,7 +234,7 @@ router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc User buy
 // @route GET /buy/user/:userId
-router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/user/:userId', ensureAuth, async (req, res) => {
     try {
         const buy = await Buy.find({
             user: req.params.userId,
@@ -241,7 +253,7 @@ router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
 
 //@desc Search buy by title
 //@route GET /buy/search/:query
-router.get('/search/:query', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/search/:query', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
         const buy = await Buy.find({ name: new RegExp(req.query.query, 'i') })
             .populate('user')

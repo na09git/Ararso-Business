@@ -1,7 +1,6 @@
 const express = require('express')
 const passport = require('passport')
 const router = express.Router()
-const path = require('path')
 
 // @route   GET contact
 router.get('/', (req, res) => {

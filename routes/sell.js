@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
-const { ensureAuth, ensureAdmin } = require('../middleware/auth')
+const { ensureAuth, ensureAdmin, ensureAdminOrWorker } = require('../middleware/auth')
 
 const Sell = require('../models/Sell');
 
@@ -22,14 +22,17 @@ const upload = multer({ storage: storage });
 
 // @desc Show add sell page
 // @route GET /sell/addsell
-router.get('/addsell', ensureAuth, ensureAdmin, (req, res) => {
-    res.render('sell/addsell', { title: 'sell Page' });
+router.get('/addsell', ensureAuth, ensureAdminOrWorker, (req, res) => {
+    res.render('sell/addsell', {
+        title: 'sell Page',
+        layout: 'admin',
+    });
 });
 
 
 // @desc Process add sell form with image upload
 // @route POST /sell
-router.post('/', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
+router.post('/', ensureAuth, ensureAdminOrWorker, upload.single('image'), async (req, res) => {
     try {
         const file = req.file;
 
@@ -78,6 +81,7 @@ router.get('/', ensureAuth, ensureAdmin, async (req, res) => {
 
         res.render('sell/index', {
             sell,
+            layout: 'admin',
         });
         console.log("You can now see All sell Here !");
     } catch (err) {
@@ -89,7 +93,7 @@ router.get('/', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc    Show single sell
 // @route   GET /sell/:id
-router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
         let sell = await Sell.findById(req.params.id)
             .populate('user')
@@ -104,6 +108,7 @@ router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
         } else {
             res.render('sell/show', {
                 sell,
+                layout: 'admin',
             })
         }
         console.log("You can now see the sell details");
@@ -117,7 +122,7 @@ router.get('/:id', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc Show edit page
 // @route GET /sell/edit/:id
-router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/edit/:id', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
         const sell = await Sell.findById(req.params.id).lean();
 
@@ -130,6 +135,7 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
         } else {
             res.render('sell/edit', {
                 sell,
+                layout: 'admin',
             });
         }
         console.log("You are in sell/edit page & can Edit this sell info");
@@ -142,7 +148,7 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
 
 // @desc Show Update page
 // @route POST /sell/:id
-router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req, res) => {
+router.post('/:id', ensureAuth, upload.single('image'), async (req, res) => {
     try {
         let sell = await Sell.findById(req.params.id).lean();
 
@@ -153,7 +159,9 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
 
         if (String(sell.user) !== req.user.id) {
             console.log('User not authorized');
-            return res.redirect('/sells');
+            return res.redirect('/sell'), {
+                layout: 'admin',
+            }
         }
 
         const file = req.file;
@@ -185,12 +193,13 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
         );
 
         console.log('sell updated successfully');
-        res.redirect('/sells');
+        res.redirect('/sell');
     } catch (err) {
         console.error(err);
         return res.render('error/500');
     }
 });
+
 
 
 
@@ -230,6 +239,7 @@ router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
 
         res.render('sell/index', {
             sell,
+            layout: 'admin',
         });
     } catch (err) {
         console.error(err);
@@ -241,13 +251,16 @@ router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
 
 //@desc Search sell by title
 //@route GET /sell/search/:query
-router.get('/search/:query', ensureAuth, ensureAdmin, async (req, res) => {
+router.get('/search/:query', ensureAuth, ensureAdminOrWorker, async (req, res) => {
     try {
         const sell = await Sell.find({ name: new RegExp(req.query.query, 'i') })
             .populate('user')
             .sort({ createdAt: 'desc' })
             .lean();
-        res.render('sell/index', { sell });
+        res.render('sell/index', {
+            sell,
+            layout: 'admin',
+        });
         console.log("Search is working !");
     } catch (err) {
         console.log(err);
