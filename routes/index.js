@@ -9,6 +9,8 @@ const News = require('../models/News')
 const Sell = require('../models/Sell')
 const Buy = require('../models/Buy')
 const Worker = require('../models/Worker')
+const Rent = require('../models/Rent')
+const Note = require('../models/Note')
 
 
 
@@ -96,6 +98,7 @@ router.get('/stories', ensureAuth, async (req, res) => {
       name: req.user.firstName,
       image: req.user.image,
       story,
+        layout: 'admin',
     })
   } catch (err) {
     console.error(err)
@@ -113,6 +116,7 @@ router.get('/newspage', ensureAuth, async (req, res) => {
       name: req.user.firstName,
       image: req.user.image,
       news,
+      layout: 'admin',
     })
   } catch (err) {
     console.error(err)
@@ -182,6 +186,45 @@ router.get('/bought', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
+
+// @desc    rents
+// @route   GET /rents
+router.get('/rents', ensureAuth, ensureAdmin, async (req, res) => {
+  try {
+    const rent = await Rent.find({ user: req.user.id })
+      .populate('user')
+      .sort({ createdAt: -1 })
+      .lean();
+
+    res.render('rents', {
+      name: req.user.firstName,
+      image: req.user.image,
+      rent,
+      layout: 'admin',
+    })
+    console.log("Dear Admin, You can see all Rent here in this Page !")
+  } catch (err) {
+    console.error(err)
+    res.render('error/500')
+  }
+})
+
+// @desc    notes
+// @route   GET /notes
+router.get('/notes', ensureAuth, async (req, res) => {
+  try {
+    const note = await Note.find({ user: req.user.id }).lean()
+    res.render('notes', {
+      name: req.user.firstName,
+      image: req.user.image,
+      note,
+      layout: 'admin',
+    })
+  } catch (err) {
+    console.error(err)
+    res.render('error/500')
+  }
+})
 
 // @desc    profile
 // @route   GET /profile

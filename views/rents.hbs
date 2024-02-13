@@ -4,103 +4,90 @@
 <!-- Include DataTables -->
 <script src="path/to/jquery.dataTables.min.js"></script>
 
-<title>Sells Page</title>
+<title>rents Page</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css"
     integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 <div>
-    {{> _addsell}}
+    {{> _addrent}}
 </div>
 
-<div style="padding: 10px;">
+<div>
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
-    <p style="padding-left: 250px;">This Are Selled Materials List</p>
-    {{#if sell}}
+    <p style="padding-left: 250px;">This Are Renter of Sena Business Buildings, List</p>
+    {{#if rent}}
     {{! Your existing table code }}
-    <table class="table table-striped w-100 table-responsive " id="data_sell">
+    <table class="table table-striped w-100 table-responsive " id="data_rent">
         <thead>
             <tr>
                 <th>No.</th>
                 <th class="text-center">Image</th>
-                <th class="text-center">seller</th>
-                <th class="text-center">Buyer</th>
-                <th class="text-center">Material</th>
-                <th class="text-center">Kilogram</th>
-                <th class="text-center">Birr</th>
-                <th class="text-center">Note</th>
+                <th class="text-center">Renter</th>
+                <th class="text-center">Place</th>
                 <th class="text-center">Phone</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Car Id</th>
+                <th class="text-center">Birr</th>
+                <th class="text-center">Bara</th>
+                <th class="text-center">Payments</th>
                 <th class="text-center">Date</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
 
         <tbody>
-            {{#each sell as |row index|}}
+            {{#each rent as |row index|}}
             <tr>
-                {{!-- 1 Image --}}
+                {{!-- 1 Index --}}
                 <td style="padding: 2px;" class="text-center">{{index}}</td>
                 {{!-- 2 Image --}}
                 <td style="padding: 2px;">
                     {{#if row.imageBase64}}
                     <a href="data:{{row.contentType}};base64,{{row.imageBase64}}" data-gallery="portfolio-gallery-app"
                         class="glightbox img-fluid post-author-img flex-shrink-0">
-                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="sell image"
+                        <img src='data:{{row.contentType}};base64,{{row.imageBase64}}' alt="rent image"
                             class="img-fluid" width="50">
                     </a>
                     {{else}}
                     <img src="images/no_image.png" width="50" class="img-thumbnail">
                     {{/if}}
                 </td>
-                {{!-- 3 seller --}}
-                <td style="padding: 2px;"><a href="/sell/{{row._id}}">{{row.seller}}</a></td>
-                {{!-- 4 buyer_name --}}
-                <td style="padding: 2px;">{{row.buyer_name}}</td>
-                {{!-- 5 material --}}
-                <td style="padding: 2px;">{{row.material}}</td>
-                {{!-- 6 kilogram --}}
-                <td style="padding: 2px;">{{row.kilogram}}</td>
-                {{!-- 7 birr --}}
-                <td style="padding: 2px;">{{row.birr}}</td>
-                {{!-- 8 note --}}
-                <td style="padding: 2px;"> {{stripTags (truncate row.note 50)}}</td>
-                {{!-- 9 phone --}}
-                <td style="padding: 2px;">{{row.phone}}</td>
-                {{!-- 10 status --}}
+                {{!-- 3 renter --}}
+                <td style="padding: 2px;">{{row.renter}}</td>
+                {{!-- 4 Place --}}
+                <td style="padding: 2px;">{{row.place}}</td>
+                {{!-- 5 phone --}}
                 <td style="padding: 2px;">
-                    <h6 class="card-title p-2 d-block " style="align-items:center;padding-left: 50px; padding-right: 40px;
-                        {{#eq row.status 'Paid'}}background-color: #9EE47E;width: 100px;
-                        {{else}}background-color: #FF3232; width: 100px;
-                        {{/eq}}">
-                        <span class="dash-gender text-center">
-                            {{row.status}}
-                        </span>
-                    </h6>
+                    <a href="tel: {{row.phone}}"> {{row.phone}}</a>
                 </td>
-                {{!-- 11 car_id --}}
-                <td style="padding: 2px;">{{row.car_id}}</td>
+                {{!-- 6 birr --}}
+                <td style="padding: 2px;">{{row.birr}}</td>
+                {{!-- 7 Bara --}}
+                <td style="padding: 2px;">{{row.bara}}</td>
 
-                {{!-- 12 Date --}}
+
+                {{!-- 8 Payment --}}
+                <td style="padding: 2px;"><a href="/rent/{{row._id}}"><button type="button"
+                            class="btn btn-outline-success">payments</button> </a></td>
+
+                {{!-- 9 Date --}}
                 <td style="padding: 2px;" class="text-center">{{formatDate row.createdAt 'MMMM Do YYYY, h:mm:ss a'}}
                 </td>
-                {{!-- 13 Action --}}
+                {{!-- 10 Action --}}
                 <td style="padding: 2px;">
                     <div style="display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr)">
                         <div>
-                            <a href="/news/{{row._id}}" class="btn p-1 btn-float  text-primary">
+                            <a href="/news/{{row._id}}" class="btn  btn-float  text-primary">
                                 <i class="fas fa-eye fa-lg mx-1" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div>
-                            <a href="/sell/edit/{{row._id}}" class="btn p-1 btn-float  text-success">
+                            <a href="/rent/edit/{{row._id}}" class="btn  btn-float  text-success">
                                 <i class="fas fa-edit fa-lg mx-1"></i>
                             </a>
                         </div>
                         <div>
-                            <form action="/sell/{{row._id}}" method="POST" id="delete-form">
+                            <form action="/rent/{{row._id}}" method="POST" id="delete-form">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn text-danger">
                                     <i class="fas fa-trash fa-lg mx-1"></i>
@@ -115,13 +102,13 @@
     </table>
 
     {{else}}
-    <p>No sell in Our School !</p>
+    <p>No Renter still from Sena Business Building !</p>
     {{/if}}
 </div>
 
 <script>
     $(document).ready(function () {
-        $("#data_sell").DataTable({
+        $("#data_rent").DataTable({
             order: [0, 'desc']
         });
     });

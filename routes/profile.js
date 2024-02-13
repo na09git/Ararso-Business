@@ -9,6 +9,8 @@ router.get('/', (req, res) => {
     try {
         res.render('profile/index', {
             layout: 'admin',
+            name: req.user.firstName,
+            image: req.user.image,
         })
     } catch (err) {
         console.error(err)

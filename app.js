@@ -137,6 +137,7 @@ app.use('/worker', require('./routes/worker'));
 app.use('/profile', require('./routes/profile'));
 app.use('/register', require('./routes/register'));
 app.use('/rent', require('./routes/rent'));
+app.use('/note', require('./routes/note'));
 
 
 const PORT = process.env.PORT || 3000

@@ -6,7 +6,7 @@
 
 
 <div style="z-index: 100; position:fixed;">
-    {{> _addnews_btn}}
+    {{> _addnews}}
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css"
@@ -93,6 +93,9 @@
 
     {{else}}
     <p>There is no News Broadcasted yet</p>
+    <div class="col-md-3" style="padding-top: 42px;">
+        <a href="/news/create" class="btn bg-primary text-white">Broadcast News</a>
+    </div>
     {{/if}}
 
 </div>

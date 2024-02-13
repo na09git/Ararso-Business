@@ -23,7 +23,9 @@ const upload = multer({ storage: storage });
 // @desc    Show create page
 // @route   GET /news/create
 router.get('/create', ensureAuth, ensureAdmin, (req, res) => {
-    res.render('news/create')
+    res.render('news/create', {
+        layout: 'admin',
+    })
 })
 
 
@@ -51,7 +53,9 @@ router.post('/', ensureAuth, ensureAdmin, upload.single('image'), async (req, re
 
         try {
             await newUpload.save();
-            res.redirect('/news');
+            res.redirect('/news', {
+                layout: 'admin',
+            });
             console.log("New News with image/upload is Successfully  Broadcasted !");
 
         } catch (error) {
@@ -79,6 +83,7 @@ router.get('/', async (req, res) => {
 
         res.render('news/index', {
             news,
+            layout: 'admin',
         })
         console.log("News/index rendered");
         console.log("You can now see All News Here !");
@@ -99,6 +104,7 @@ router.get('/:id', async (req, res) => {
 
         res.render('news/show', {
             news,
+            layout: 'admin',
         })
         console.log("You can now see the news details");
 
@@ -121,10 +127,13 @@ router.get('/edit/:id', ensureAuth, ensureAdmin, async (req, res) => {
         }
 
         if (news.user != req.user.id) {
-            res.redirect('/news')
+            res.redirect('/news', {
+                layout: 'admin',
+            })
         } else {
             res.render('news/edit', {
                 news,
+                layout: 'admin',
             })
             console.log("You are in news edit page & can Edit this news");
         }
@@ -149,7 +158,9 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
 
         if (String(news.user) !== req.user.id) {
             console.log('User not authorized');
-            return res.redirect('/news');
+            return res.redirect('/news', {
+                layout: 'admin',
+            });
         }
 
         const file = req.file;
@@ -181,7 +192,9 @@ router.post('/:id', ensureAuth, ensureAdmin, upload.single('image'), async (req,
         );
 
         console.log('News updated successfully');
-        res.redirect('/news');
+        res.redirect('/news', {
+            layout: 'admin',
+        });
     } catch (err) {
         console.error(err);
         return res.render('error/500');
@@ -205,7 +218,9 @@ router.delete('/:id', ensureAuth, ensureAdmin, async (req, res) => {
             res.redirect('/newspage')
         } else {
             await News.deleteOne({ _id: req.params.id })
-            res.redirect('/newspage')
+            res.redirect('/newspage', {
+                layout: 'admin',
+            })
         }
         console.log("News Deleted Successfully !");
 
@@ -226,6 +241,7 @@ router.get('/user/:userId', ensureAuth, ensureAdmin, async (req, res) => {
 
         res.render('news/index', {
             news,
+            layout: 'admin',
         })
     } catch (err) {
         console.error(err)
@@ -243,6 +259,7 @@ router.get('/search/:query', async (req, res) => {
             .lean()
         res.render('news/index', {
             news,
+            layout: 'admin',
         })
         console.log("Search is working !");
     } catch (err) {
