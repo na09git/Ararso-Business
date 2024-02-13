@@ -1,5 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
 <!-- Include jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -18,7 +16,7 @@
 
 <div style="padding: 10px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
-    <p style="padding-left: 250px;">This Are bought Materials List</p>
+    <p style="padding-left: 20px;">This Are bought Materials List</p>
 
     <p style="padding-left: 20px"> This Are Number of Paid Vs Not-Paid </p>
 
@@ -136,6 +134,7 @@
     {{/if}}
 </div>
 
+
 <script>
     $(document).ready(function () {
         // Initialize counts and total Birr amounts
@@ -147,6 +146,11 @@
 
         // Current date
         var currentDate = new Date();
+
+        // Calculate the start of the week (Sunday) and the start of the month
+        var startOfWeek = new Date(currentDate);
+        startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+        var startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
         // Loop through each row in the table
         $("#data_buy tbody tr").each(function () {
@@ -162,18 +166,20 @@
             }
             totalBirr += birr;
 
-            // Calculate weekly total Birr (assuming a week is 7 days)
-            var date = new Date($(this).find("td:nth-child(12)").text().trim()); // Assuming date is in the 12th column
-            var oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-            if (date >= oneWeekAgo && date <= currentDate) {
+            // Calculate the purchase date
+            var dateString = $(this).find("td:nth-child(12)").text().trim(); // Assuming date is in the 12th column
+            var purchaseDate = new Date(dateString);
+
+            // Calculate the difference in days between the current date and the purchase date
+            var daysDifference = Math.floor((currentDate - purchaseDate) / (1000 * 60 * 60 * 24));
+
+            // If the purchase was made within the last 7 days
+            if (daysDifference <= 7) {
                 weeklyTotalBirr += birr;
             }
 
-            // Calculate monthly total Birr
-            if (
-                date.getMonth() === currentDate.getMonth() &&
-                date.getFullYear() === currentDate.getFullYear()
-            ) {
+            // If the purchase was made within the last 30 days
+            if (purchaseDate >= startOfMonth) {
                 monthlyTotalBirr += birr;
             }
         });
@@ -182,6 +188,13 @@
         $("#paidCount").text("Paid: " + paidCount);
         $("#notPaidCount").text("Not Paid: " + notPaidCount);
         $("#totalBirr").text("Total Amount (Birr): " + totalBirr.toFixed(2)); // Display total with 2 decimal places
+
+        // Check if the weekly total is greater than monthly total
+        if (weeklyTotalBirr > monthlyTotalBirr) {
+            // Update weekly and monthly totals to the same value
+            monthlyTotalBirr = weeklyTotalBirr;
+        }
+
         $("#weeklyTotalBirr").text("Weekly Total Amount (Birr): " + weeklyTotalBirr.toFixed(2)); // Display weekly total with 2 decimal places
         $("#monthlyTotalBirr").text("Monthly Total Amount (Birr): " + monthlyTotalBirr.toFixed(2)); // Display monthly total with 2 decimal places
     });
