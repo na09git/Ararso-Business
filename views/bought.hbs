@@ -134,6 +134,8 @@
     {{/if}}
 </div>
 
+
+
 <script>
     $(document).ready(function () {
         // Initialize counts and total Birr amounts
@@ -146,9 +148,10 @@
         // Current date
         var currentDate = new Date();
 
-        // Calculate the start of the week (Sunday) and the start of the month
-        var startOfWeek = new Date(currentDate);
-        startOfWeek.setDate(currentDate.getDate() - 6); // Start of the last 7 days
+        // Calculate the start date for the last 7 days
+        var startDateLast7Days = new Date(currentDate.getTime() - (6 * 24 * 60 * 60 * 1000)); // 7 days ago in milliseconds
+
+        // Calculate the start of the month
         var startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
 
         // Loop through each row in the table
@@ -169,11 +172,8 @@
             var dateString = $(this).find("td:nth-child(12)").text().trim(); // Assuming date is in the 12th column
             var purchaseDate = new Date(dateString);
 
-            // Calculate the difference in milliseconds between the current date and the purchase date
-            var timeDifference = currentDate.getTime() - purchaseDate.getTime();
-
-            // If the purchase was made within the last 7 days
-            if (timeDifference <= 7 * 24 * 60 * 60 * 1000) { // 7 days in milliseconds
+            // If the purchase was made within the last 7 days (including today)
+            if (purchaseDate >= startDateLast7Days && purchaseDate <= currentDate) {
                 weeklyTotalBirr += birr;
             }
 
