@@ -53,9 +53,7 @@ router.post('/', ensureAuth, ensureAdmin, upload.single('image'), async (req, re
 
         try {
             await newUpload.save();
-            res.redirect('/news', {
-                layout: 'admin',
-            });
+            res.redirect('/news');
             console.log("New News with image/upload is Successfully  Broadcasted !");
 
         } catch (error) {
