@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <!-- Include jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -26,7 +28,14 @@
     <span style="color: red;">|</span>
     <h6 id="notPaidCount"></h6>
     <span style="color: red;">|</span>
-    <h6 id="totalBirr"></h6> <!-- Display total Birr amount here -->
+    <h6 id="weeklyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="monthlyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="totalBirr"></h6>
+    <!-- Display total Birr amount here -->
+
+    <!-- Display total Birr amount here -->
 
     {{#if buy}}
     {{! Your existing table code }}
@@ -127,29 +136,54 @@
     {{/if}}
 </div>
 
-
 <script>
     $(document).ready(function () {
-        // Count the number of paid and not-paid entries
+        // Initialize counts and total Birr amounts
         var paidCount = 0;
         var notPaidCount = 0;
         var totalBirr = 0;
+        var weeklyTotalBirr = 0;
+        var monthlyTotalBirr = 0;
 
+        // Current date
+        var currentDate = new Date();
+
+        // Loop through each row in the table
         $("#data_buy tbody tr").each(function () {
-            var status = $(this).find("td:eq(8)").text().trim(); // Assuming status is the 9th column (index 8)
+            // Find status and birr amount from each row
+            var status = $(this).find("td:nth-child(9)").text().trim(); // Assuming status is in the 9th column
+            var birr = parseFloat($(this).find("td:nth-child(8)").text().trim()); // Assuming birr is in the 8th column
+
+            // Update counts and total Birr amounts
             if (status === "Paid") {
                 paidCount++;
             } else {
                 notPaidCount++;
             }
-
-            var birr = parseFloat($(this).find("td:eq(7)").text().trim()); // Assuming birr is the 8th column (index 7)
             totalBirr += birr;
+
+            // Calculate weekly total Birr (assuming a week is 7 days)
+            var date = new Date($(this).find("td:nth-child(12)").text().trim()); // Assuming date is in the 12th column
+            var oneWeekAgo = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+            if (date >= oneWeekAgo && date <= currentDate) {
+                weeklyTotalBirr += birr;
+            }
+
+            // Calculate monthly total Birr
+            if (
+                date.getMonth() === currentDate.getMonth() &&
+                date.getFullYear() === currentDate.getFullYear()
+            ) {
+                monthlyTotalBirr += birr;
+            }
         });
 
-        // Display the counts and total Birr amount using h6 tags
+        // Update the HTML elements with the counts and total Birr amounts
         $("#paidCount").text("Paid: " + paidCount);
         $("#notPaidCount").text("Not Paid: " + notPaidCount);
-        $("#totalBirr").text("Total Amount (Birr): " + totalBirr.toFixed(2)); // Assuming you want to display total with 2 decimal places
+        $("#totalBirr").text("Total Amount (Birr): " + totalBirr.toFixed(2)); // Display total with 2 decimal places
+        $("#weeklyTotalBirr").text("Weekly Total Amount (Birr): " + weeklyTotalBirr.toFixed(2)); // Display weekly total with 2 decimal places
+        $("#monthlyTotalBirr").text("Monthly Total Amount (Birr): " + monthlyTotalBirr.toFixed(2)); // Display monthly total with 2 decimal places
     });
+
 </script>
