@@ -1,2 +1,2 @@
 Business Management
-Developed by NileTech Plc
+Powered by NileTech Plc
