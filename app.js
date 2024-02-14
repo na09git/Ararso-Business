@@ -15,7 +15,7 @@ const base64Helper = (data) => new handlebars.SafeString(data.toString('base64')
 const app = express()
 const { ensureAdmin, ensureWorker, ensureAdminOrWorker } = require('./middleware/auth');
 const { uuid } = require('uuidv4');
-const nodemailer = require('nodemailer');
+
 
 
 const User = require('./models/User')
@@ -25,6 +25,7 @@ const News = require('./models/News')
 const Sell = require('./models/Sell')
 const Buy = require('./models/Buy')
 const Worker = require('./models/Worker')
+
 
 // Load config
 dotenv.config({ path: './config/config.env' })

@@ -54,3 +54,5 @@ $(document).ready(function () {
     $("#weeklyTotalBirr").text("Weekly Total Amount (Birr): " + weeklyTotalBirr.toFixed(2)); // Display weekly total with 2 decimal places
     $("#monthlyTotalBirr").text("Monthly Total Amount (Birr): " + monthlyTotalBirr.toFixed(2)); // Display monthly total with 2 decimal places
 });
+
+

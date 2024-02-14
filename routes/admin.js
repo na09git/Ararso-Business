@@ -4,15 +4,20 @@ const { ensureAuth, ensureAdmin } = require('../middleware/auth')
 const router = express.Router()
 
 const User = require('../models/User')
+const Sell = require('../models/Sell');
+
+
 
 // @route   GET /home
-router.get('/admin', ensureAdmin, (req, res) => {
+router.get('/admin', ensureAdmin, async (req, res) => {
   try {
     const user = req.user;
+    const sells = await Sell.find().populate('user').lean();
 
     res.render('admin', {
-      layout: false,
-      user: req.user, // Pass the user to the template
+      layout: admin,
+      user: req.user, // Pass the user to the template if needed
+      sells: sells // Pass sell data to the template// Pass the user to the template
     })
   } catch (err) {
     console.error(err)

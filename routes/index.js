@@ -14,6 +14,7 @@ const Note = require('../models/Note')
 
 
 
+
 // @desc    Login/Landing page
 // @route   GET /login
 router.get('/login', ensureGuest, (req, res) => {
@@ -222,14 +223,13 @@ router.get('/notes', ensureAuth, async (req, res) => {
 
 // @desc    profile
 // @route   GET /profile
-router.get('/profile', ensureAuth, ensureAdminOrWorker, async (req, res) => {
+router.get('/profile', ensureAuth, async (req, res) => {
   try {
     res.render('profile', {
       layout: 'admin',
-      name: req.user.firstName,
-      image: req.user.image,
+
     })
-    console.log("Dear Admin, You can see all Profile here in this Page !")
+    console.log("Dear Admin, You can see your  Profile here in this Page !")
   } catch (err) {
     console.error(err)
     res.render('error/500')

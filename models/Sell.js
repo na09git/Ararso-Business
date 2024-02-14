@@ -21,7 +21,7 @@ const SellSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    body: {
+    note: {
         type: String,
     },
     phone: {

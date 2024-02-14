@@ -9,6 +9,7 @@
     integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<script src="/js/reports.js"></script>
 
 <div>
     {{> _addsell}}
@@ -27,6 +28,21 @@
 
 <div style="padding: 10px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
+    <p style="padding-left: 20px"> This Are Number of Paid Vs Not-Paid </p>
+
+    <!-- Add these h6 tags where you want to display the counts -->
+    <span style="color: red;">|</span>
+    <h6 id="paidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="notPaidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="weeklyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="monthlyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="totalBirr"></h6>
+    <!-- Display total Birr amount here -->
+
     {{#if sell}}
     {{! Your existing table code }}
     <table class="table table-striped w-100 table-responsive " id="data_sell">
@@ -129,11 +145,72 @@
     {{/if}}
 </div>
 
+
 <script>
     $(document).ready(function () {
-        $("#data_sell").DataTable({
-            order: [0, 'desc']
-        });
-    });
+        console.log("Script is running...");
 
+        // Initialize counts and total Birr amounts
+        var paidCount = 0;
+        var notPaidCount = 0;
+        var totalBirr = 0;
+        var weeklyTotalBirr = 0;
+        var monthlyTotalBirr = 0;
+
+        // Current date
+        var currentDate = new Date();
+
+        // Calculate the start date for the last 7 days starting from today
+        var startDateLast7Days = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000)); // 7 days ago in milliseconds
+        console.log("Start date for last 7 days: ", startDateLast7Days);
+
+        // Calculate the start of the month starting from today
+        var startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        console.log("Start of the month: ", startOfMonth);
+
+        // Loop through each row in the table
+        $("#data_sell tbody tr").each(function () {
+            console.log("Processing row...");
+            // Find status and birr amount from each row
+            var status = $(this).find("td:nth-child(10)").text().trim(); // Assuming status is in the 10th column
+            var birr = parseFloat($(this).find("td:nth-child(7)").text().trim()); // Assuming birr is in the 7th column
+
+            console.log("Status:", status);
+            console.log("Birr:", birr);
+
+            // Update counts and total Birr amounts
+            if (status === "Paid") {
+                paidCount++;
+            } else {
+                notPaidCount++;
+            }
+            totalBirr += birr;
+
+            // Calculate the purchase date
+            var dateString = $(this).find("td:nth-child(12)").text().trim(); // Assuming date is in the 12th column
+            var purchaseDate = new Date(dateString);
+
+            console.log("Purchase date:", purchaseDate);
+
+            // If the purchase was made within the last 7 days (including today)
+            if (purchaseDate >= startDateLast7Days && purchaseDate <= currentDate) {
+                weeklyTotalBirr += birr;
+            }
+
+            // If the purchase was made within the current month
+            if (
+                purchaseDate.getMonth() === currentDate.getMonth() &&
+                purchaseDate.getFullYear() === currentDate.getFullYear()
+            ) {
+                monthlyTotalBirr += birr;
+            }
+        });
+
+        // Update the HTML elements with the counts and total Birr amounts
+        $("#paidCount").text("Paid: " + paidCount);
+        $("#notPaidCount").text("Not Paid: " + notPaidCount);
+        $("#totalBirr").text("Total Amount (Birr): " + totalBirr.toFixed(2)); // Display total with 2 decimal places
+        $("#weeklyTotalBirr").text("Weekly Total Amount (Birr): " + weeklyTotalBirr.toFixed(2)); // Display weekly total with 2 decimal places
+        $("#monthlyTotalBirr").text("Monthly Total Amount (Birr): " + monthlyTotalBirr.toFixed(2)); // Display monthly total with 2 decimal places
+    });
 </script>

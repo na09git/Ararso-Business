@@ -17,16 +17,16 @@
             <div class="card">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                    <img src="data:{{profile.contentType}};base64,{{profile.imageBase64}}" alt="Profile"
-                        class="rounded-circle">
-                    <h2>{{profile.fullname}}</h2>
-                    <h3>{{profile.job}}</h3>
+                    <img src="img/sena-logo.png" alt="Profile" class="rounded-circle">
+                    <h2>Sena Business</h2>
+                    <h3>Entreprenuer</h3>
                     <div class="social-links mt-2">
-                        <a href="{{profile.twitter}}" class="twitter"><i class="bi bi-twitter"></i></a>
-                        <a href="{{profile.facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="{{profile.instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="{{profile.linkedin}}" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        <a href="{{profile.youtube}}" class="youtube"><i class="bi bi-youtube"></i></a>
+                        <a href="https://twitter.com/binmhmd11" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="https://facebook.com/binmhmd99/" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com/binmhmd99/" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/anwar-mohammed-3ba9a6289" class="linkedin"><i
+                                class="bi bi-linkedin"></i></a>
+                        <a href="https://t.me/binmhmd99" class="youtube"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -45,17 +45,6 @@
                                 data-bs-target="#profile-overview">Overview</button>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="/profile/{{profile._id}}">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="">Edit
-                                    Profile</button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/profile/add">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="">Add Profile</button>
-                            </a>
-                        </li>
 
                     </ul>
                     <div class="tab-content pt-2">
@@ -63,44 +52,44 @@
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
                             <h5 class="card-title">About</h5>
                             <p class="small fst-italic">
-                                {{profile.about}}
+                                Sena BUsiness
                             </p>
 
                             <h5 class="card-title">Profile Details</h5>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                <div class="col-lg-9 col-md-8">{{profile.fullname}}</div>
+                                <div class="col-lg-9 col-md-8">Sena Business</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Company</div>
-                                <div class="col-lg-9 col-md-8">{{profile.company}}</div>
+                                <div class="col-lg-9 col-md-8">Sena Business Plc</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Job</div>
-                                <div class="col-lg-9 col-md-8">{{profile.job}}</div>
+                                <div class="col-lg-9 col-md-8">Manager</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Country</div>
-                                <div class="col-lg-9 col-md-8">{{profile.country}}</div>
+                                <div class="col-lg-9 col-md-8">Ethiopia</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Address</div>
-                                <div class="col-lg-9 col-md-8">{{profile.address}}</div>
+                                <div class="col-lg-9 col-md-8">Orommia , Harar ,Melka Rafu</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Phone</div>
-                                <div class="col-lg-9 col-md-8">{{profile.phone}}</div>
+                                <div class="col-lg-9 col-md-8">+251 91570000</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Email</div>
-                                <div class="col-lg-9 col-md-8">{{profile.email}}</div>
+                                <div class="col-lg-9 col-md-8">senabusiness@gmail.com</div>
                             </div>
 
                         </div>
