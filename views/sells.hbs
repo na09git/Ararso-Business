@@ -13,10 +13,20 @@
 <div>
     {{> _addsell}}
 </div>
+<div class="pagetitle">
+    <h1> Material Selled to Customer by Sena Business</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Sell</li>
+        </ol>
+    </nav>
+</div>
+<!-- End Page Title -->
+
 
 <div style="padding: 10px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
-    <p style="padding-left: 250px;">This Are Selled Materials List</p>
     {{#if sell}}
     {{! Your existing table code }}
     <table class="table table-striped w-100 table-responsive " id="data_sell">

@@ -1,0 +1,146 @@
+<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+    <!-- Profile Edit Form -->
+    {{!-- <form> --}}
+        <form action="/profile/{{profile._id}}" method="POST" class="col-md-8 col-lg-8" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="post">
+
+            {{!-- Image --}}
+            <div class="row mb-3">
+                <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Change Profile
+                    Image</label>
+                <div class="col-md-8 col-lg-9">
+
+                    {{#if profile.imageBase64}}
+                    <img src='data:{{profile.contentType}};base64,{{profile.imageBase64}}' alt="{{profile.name}}"
+                        width="100">
+                    {{else}}
+                    <img src="images/no_image.png" alt="{{profile.name}}" width="100" class="img-thumbnail">
+                    {{/if}}
+
+                    <div class="pt-2">
+                        <a href="#" type="file" class="form-control" id="image" name="image"
+                            class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                                class="bi bi-upload"></i></a>
+
+                    </div>
+                </div>
+            </div>
+            {{!-- fullname --}}
+            <div class="row mb-3">
+                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full
+                    Name</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="fullname" type="fullname" class="form-control" id="fullname"
+                        value="{{profile.fullname}}">
+                </div>
+            </div>
+            {{!-- About --}}
+            <div class="row mb-3">
+                <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                <div class="col-md-8 col-lg-9">
+                    <textarea name="about" class="form-control" id="about"
+                        style="height: 100px">{{profile.fullname}}</textarea>
+                </div>
+            </div>
+            {{!-- Company --}}
+            <div class="row mb-3">
+                <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="company" type="text" class="form-control" id="company" value="{{profile.company}}">
+                </div>
+            </div>
+            {{!-- Job --}}
+            <div class="row mb-3">
+                <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="job" type="text" class="form-control" id="job" value="{{profile.job}}">
+                </div>
+            </div>
+            {{!-- Country --}}
+            <div class="row mb-3">
+                <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="country" type="text" class="form-control" id="Country" value="{{profile.country}}">
+                </div>
+            </div>
+            {{!-- Address --}}
+            <div class="row mb-3">
+                <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="address" type="text" class="form-control" id="Address" value="{{profile.country}}">
+                </div>
+            </div>
+            {{!-- Phone --}}
+            <div class="row mb-3">
+                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="phone" type="text" class="form-control" id="Phone" value="{{profile.phone}}">
+                </div>
+            </div>
+            {{!-- Email --}}
+            <div class="row mb-3">
+                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="email" type="email" class="form-control" id="Email" value="{{profile.country}}">
+                </div>
+            </div>
+            {{!-- Twitter --}}
+            <div class="row mb-3">
+                <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter
+                    Profile</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="twitter" type="text" class="form-control" id="Twitter" value="{{profile.twitter}}">
+                </div>
+            </div>
+            {{!-- Facebook --}}
+            <div class="row mb-3">
+                <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook
+                    Profile</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="facebook" type="text" class="form-control" id="Facebook" value="{{profile.facebook}}">
+                </div>
+            </div>
+            {{!-- Instagram --}}
+            <div class="row mb-3">
+                <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram
+                    Profile</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="instagram" type="text" class="form-control" id="Instagram"
+                        value="{{profile.instagram}}">
+                </div>
+            </div>
+            <!--  Linkedin--->
+
+            <div class="row mb-3">
+                <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
+                    Profile</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{profile.linkedin}}">
+                </div>
+            </div>
+            <!--  Youtube--->
+            <div class="row mb-3">
+                <label for="youtube" class="col-md-4 col-lg-3 col-form-label">Youtube
+                    Profile</label>
+                <div class="col-md-8 col-lg-9">
+                    <input name="youtube" type="text" class="form-control" id="youtube" value="{{profile.youtube}}">
+                </div>
+            </div>
+            <!--  Action--->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a style="padding-left: 10%; padding-right: 10%;" href="/profile" class="btn btn-warning">Cancel</a>
+
+                <div>
+                    <form action="/profile/{{row._id}}" method="POST" id="delete-form">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <a href="/profile/{{row._id}}" type="submit" class="btn btn-danger btn-sm"
+                            title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                    </form>
+                </div>
+            </div>
+        </form>
+        <!-- End Profile Edit Form -->
+
+</div>

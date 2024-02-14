@@ -135,7 +135,6 @@ app.use('/sell', require('./routes/sell'));
 app.use('/buy', require('./routes/buy'));
 app.use('/worker', require('./routes/worker'));
 app.use('/profile', require('./routes/profile'));
-app.use('/register', require('./routes/register'));
 app.use('/rent', require('./routes/rent'));
 app.use('/note', require('./routes/note'));
 

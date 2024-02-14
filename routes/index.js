@@ -27,10 +27,7 @@ router.get('/login', ensureGuest, (req, res) => {
 // @route   GET /home
 router.get('/', ensureAuth, async (req, res) => {
   try {
-    res.render('home', {
-      name: req.user.firstName,
-      image: req.user.image,
-    })
+    res.render('home')
     console.log("You are in / Page !");
   } catch (err) {
     console.error(err)
@@ -42,10 +39,7 @@ router.get('/', ensureAuth, async (req, res) => {
 // @route   GET /home
 router.get('/home', ensureAuth, async (req, res) => {
   try {
-    res.render('home', {
-      name: req.user.firstName,
-      image: req.user.image,
-    })
+    res.render('home')
     console.log("You are in /home Page !");
   } catch (err) {
     console.error(err)
@@ -98,7 +92,7 @@ router.get('/stories', ensureAuth, async (req, res) => {
       name: req.user.firstName,
       image: req.user.image,
       story,
-        layout: 'admin',
+      layout: 'admin',
     })
   } catch (err) {
     console.error(err)
@@ -235,7 +229,7 @@ router.get('/profile', ensureAuth, ensureAdminOrWorker, async (req, res) => {
       name: req.user.firstName,
       image: req.user.image,
     })
-    console.log("Dear Admin, You can see all Buy here in this Page !")
+    console.log("Dear Admin, You can see all Profile here in this Page !")
   } catch (err) {
     console.error(err)
     res.render('error/500')

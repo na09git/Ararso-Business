@@ -1,0 +1,93 @@
+<div class="pagetitle">
+    <h1>Add New Material Selled to Customer by Sena Business</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Profile</li>
+        </ol>
+    </nav>
+</div>
+<!-- End Page Title -->
+
+<div class="row p-2 ">
+    <form action="/profile" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <!--- 1 Image --->
+        <div class="mb-1 col-md-4 col-lg-6 col-xl-4 mx-auto">
+            <label for="image" class="form-label">Select Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+        <!--- 2 fullname -->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="title" class="form-label" required>Full Name</label>
+            <input type="fullname" class="form-control" id="fullname" name="fullname" placeholder="Enter fullname ">
+        </div>
+        <!--- 3 about --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="title" class="form-label" required>About</label>
+            <input type="about" class="form-control" id="about" name="about" placeholder="Enter about">
+        </div>
+
+        <!--- 4 company --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="title" class="form-label" required>Company</label>
+            <input type="company" class="form-control" id="company" name="company" placeholder="Enter company">
+        </div>
+        <!--- 5 job--->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Job</label>
+            <input type="job" class="form-control " id="job" name="job" placeholder="Enter job">
+        </div>
+        <!--- 6  country --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Country</label>
+            <input type="text" class="form-control " id="country" name="country" placeholder="Enter country">
+        </div>
+        <!--- 7 address --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Address</label>
+            <input type="address" class="form-control " id="address" name="address" placeholder="Enter address">
+        </div>
+        <!--- 8 Phone --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Phone</label>
+            <input type="phone" class="form-control " id="phone" name="phone" placeholder="Enter Phone">
+        </div>
+        <!--- 9 email --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Email</label>
+            <input type="email" class="form-control " id="email" name="email" placeholder="Enter email">
+        </div>
+        <!--- 10 twitter --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Twitter</label>
+            <input type="twitter" class="form-control " id="twitter" name="twitter" placeholder="Enter twitter">
+        </div>
+        <!--- 11 facebook --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Facebook</label>
+            <input type="facebook" class="form-control " id="facebook" name="facebook" placeholder="Enter facebook">
+        </div>
+        <!--- 12 telegram --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Telegram</label>
+            <input type="telegram" class="form-control " id="telegram" name="telegram" placeholder="Enter telegram">
+        </div>
+        <!--- 13 instagram --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Instagram</label>
+            <input type="instagram" class="form-control " id="instagram" name="instagram" placeholder="Enter instagram">
+        </div>
+        <!--- 14 youtube --->
+        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+            <label for="text" class="form-label ">Youtube</label>
+            <input type="youtube" class="form-control " id="youtube" name="youtube" placeholder="Enter youtube">
+        </div>
+
+        <!--- 15 Action --->
+        <div class="mb-3 col-md-6 col-lg-2 col-xl-4 mx-auto" style="padding-top: 10px;">
+            <button type="submit" class="btn btn-primary">Add </button>
+            <a href="/profile" class="btn btn-warning">Cancel</a>
+        </div>
+
+    </form>
+</div>
