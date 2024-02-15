@@ -111,7 +111,6 @@ router.get('/newspage', ensureAuth, async (req, res) => {
       name: req.user.firstName,
       image: req.user.image,
       news,
-      layout: 'admin',
     })
   } catch (err) {
     console.error(err)
