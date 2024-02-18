@@ -20,7 +20,7 @@ const { uuid } = require('uuidv4');
 
 const User = require('./models/User')
 
-const Story = require('./models/Story')
+const Report = require('./models/Report')
 const News = require('./models/News')
 const Sell = require('./models/Sell')
 const Buy = require('./models/Buy')
@@ -118,18 +118,16 @@ app.use(function (req, res, next) {
 // The express.static middleware should be placed before other middleware or route handlers that might need to handle specific routes. 
 app.use(express.static(path.join(__dirname, 'assets')))
 app.use(express.static(path.join(__dirname, 'assets2')))
-app.use(express.static(path.join(__dirname, 'uploadstory', 'uploadnews', 'uploadbuy', 'uploadsell', 'uploadworker')))
+app.use(express.static(path.join(__dirname, 'uploadreport', 'uploadnews', 'uploadbuy', 'uploadsell', 'uploadworker')))
 
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
-app.use('/story', require('./routes/story'))
+app.use('/report', require('./routes/report'))
 app.use('/news', require('./routes/news'));
 app.use('/home', require('./routes/home'))
 app.use('/admin', require('./routes/admin'))
-app.use('/homeworker', require('./routes/homeworker'))
 app.use('/contact', require('./routes/contact'));
-app.use('/directormessage', require('./routes/directormessage'));
 app.use('/vission', require('./routes/vission'));
 app.use('/privacy', require('./routes/privacy'));
 app.use('/terms', require('./routes/terms'));

@@ -4,7 +4,7 @@ const { ensureAuth, ensureGuest, ensureAdmin, ensureAdminOrWorker } = require('.
 
 const User = require('../models/User')
 
-const Story = require('../models/Story')
+const Report = require('../models/Report')
 const News = require('../models/News')
 const Sell = require('../models/Sell')
 const Buy = require('../models/Buy')
@@ -84,15 +84,15 @@ router.get('/homeworker', ensureAuth, ensureAdminOrWorker, async (req, res) => {
 })
 
 
-// @desc    stories
-// @route   GET /stories
-router.get('/stories', ensureAuth, async (req, res) => {
+// @desc    reports
+// @route   GET /reports
+router.get('/reports', ensureAuth, ensureAdmin, async (req, res) => {
   try {
-    const story = await Story.find({ user: req.user.id }).lean()
-    res.render('stories', {
+    const report = await Report.find().lean()
+    res.render('reports', {
       name: req.user.firstName,
       image: req.user.image,
-      story,
+      report,
       layout: 'admin',
     })
   } catch (err) {
