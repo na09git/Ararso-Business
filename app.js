@@ -17,7 +17,6 @@ const { ensureAdmin, ensureWorker, ensureAdminOrWorker } = require('./middleware
 const { uuid } = require('uuidv4');
 
 
-
 const User = require('./models/User')
 
 const Report = require('./models/Report')
