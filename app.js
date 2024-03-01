@@ -22,7 +22,7 @@ const User = require('./models/User')
 const Report = require('./models/Report')
 const News = require('./models/News')
 const Sell = require('./models/Sell')
-const Buy = require('./models/Buy')
+const Bittaa = require('./models/Bittaa')
 const Worker = require('./models/Worker')
 
 
@@ -122,7 +122,7 @@ app.use(express.static(path.join(__dirname, 'uploadreport', 'uploadnews', 'uploa
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
-app.use('/report', require('./routes/report'))
+app.use('/report', require('./routes/gabaasa'))
 app.use('/news', require('./routes/news'));
 app.use('/home', require('./routes/home'))
 app.use('/admin', require('./routes/admin'))
@@ -131,7 +131,7 @@ app.use('/vission', require('./routes/vission'));
 app.use('/privacy', require('./routes/privacy'));
 app.use('/terms', require('./routes/terms'));
 app.use('/sell', require('./routes/sell'));
-app.use('/buy', require('./routes/buy'));
+app.use('/bittaa', require('./routes/bittaa'));
 app.use('/worker', require('./routes/worker'));
 app.use('/profile', require('./routes/profile'));
 app.use('/rent', require('./routes/rent'));

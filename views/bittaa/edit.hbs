@@ -4,20 +4,19 @@
 
         <div class="row text-center" style="align-items: center;">
             <h3 class="bg-primary p-1" style="--bs-bg-opacity: .2; padding-left: 40px; padding-top: 70px;">
-                Edit Buy Information</h3>
+                Edit bittaa Information</h3>
         </div>
 
         <div class="row " style="padding-left: 10px;">
-            <form action="/buy/{{buy._id}}" method="POST" class="col-md-8 col-lg-8" enctype="multipart/form-data">
+            <form action="/bittaa/{{bittaa._id}}" method="POST" class="col-md-8 col-lg-8" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="post">
                 <!-- 1 Name--->
                 <div class="mb-2 row" style="padding-top:20px;">
                     <div class="col-3">
-                        <label for="name" class="form-label"> Buyer Name:</label>
+                        <label for="name" class="form-label"> Maqaa Nama Meshaa Bite:</label>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="buyer_name" name="buyer_name"
-                            value="{{buy.buyer_name}}">
+                        <input type="text" class="form-control" id="name" name="name" value="{{bittaa.name}}">
                     </div>
                 </div>
                 <!-- 2 Material -->
@@ -27,22 +26,27 @@
                     </div>
                     <div class="col">
                         <select class="form-select" id="material" name="material">
-                            <option value="Dinicha" {{#if (eq buy.material 'Dinicha' )}}selected{{/if}}>Dinicha</option>
-                            <option value="Karot" {{#if (eq buy.material 'Karot' )}}selected{{/if}}>Karot</option>
-                            <option value="Kurumba" {{#if (eq buy.material 'Kurumba' )}}selected{{/if}}>Kurumba</option>
-                            <option value="Qayasir" {{#if (eq buy.material 'Qayasir' )}}selected{{/if}}>Qayasir</option>
-                            <option value="Shunkurtaa" {{#if (eq buy.material 'Shunkurtaa' )}}selected{{/if}}>Shunkurtaa
+                            <option value="Dinicha" {{#if (eq bittaa.material 'Dinicha' )}}selected{{/if}}>Dinicha
                             </option>
-                            <option value="Shukaar" {{#if (eq buy.material 'Shukaar' )}}selected{{/if}}>Shukaar</option>
-                            <option value="Timaatim" {{#if (eq buy.material 'Timaatim' )}}selected{{/if}}>Timaatim
+                            <option value="Karot" {{#if (eq bittaa.material 'Karot' )}}selected{{/if}}>Karot</option>
+                            <option value="Kurumba" {{#if (eq bittaa.material 'Kurumba' )}}selected{{/if}}>Kurumba
                             </option>
-                            <option value="Luqqaa" {{#if (eq buy.material 'Luqqaa' )}}selected{{/if}}>Luqqaa</option>
-                            <option value="Joniya" {{#if (eq buy.material 'Joniya' )}}selected{{/if}}>Joniya</option>
-                            <option value="Car Material" {{#if (eq buy.material 'Car Material' )}}selected{{/if}}>Car
+                            <option value="Qayasir" {{#if (eq bittaa.material 'Qayasir' )}}selected{{/if}}>Qayasir
+                            </option>
+                            <option value="Shunkurtaa" {{#if (eq bittaa.material 'Shunkurtaa' )}}selected{{/if}}>
+                                Shunkurtaa
+                            </option>
+                            <option value="Shukaar" {{#if (eq bittaa.material 'Shukaar' )}}selected{{/if}}>Shukaar
+                            </option>
+                            <option value="Timaatim" {{#if (eq bittaa.material 'Timaatim' )}}selected{{/if}}>Timaatim
+                            </option>
+                            <option value="Luqqaa" {{#if (eq bittaa.material 'Luqqaa' )}}selected{{/if}}>Luqqaa</option>
+                            <option value="Joniya" {{#if (eq bittaa.material 'Joniya' )}}selected{{/if}}>Joniya</option>
+                            <option value="Car Material" {{#if (eq bittaa.material 'Car Material' )}}selected{{/if}}>Car
                                 Material</option>
-                            <option value="Building Material" {{#if (eq buy.material 'Building Material'
+                            <option value="Building Material" {{#if (eq bittaa.material 'Building Material'
                                 )}}selected{{/if}}>Building Material</option>
-                            <option value="Other" {{#if (eq buy.material 'Other' )}}selected{{/if}}>Other</option>
+                            <option value="Other" {{#if (eq bittaa.material 'Other' )}}selected{{/if}}>Other</option>
                         </select>
 
                     </div>
@@ -54,7 +58,7 @@
                     </div>
                     <div class="col">
                         <input type="from_seller" class="form-control" id="from_seller" name="from_seller"
-                            value="{{buy.from_seller}}">
+                            value="{{bittaa.from_seller}}">
                     </div>
                 </div>
                 <!-- 4 Phone --->
@@ -63,7 +67,17 @@
                         <label for="phone" class="form-label">Phone:</label>
                     </div>
                     <div class="col">
-                        <input type="tel" class="form-control " id="phone" name="phone" value="{{buy.phone}}">
+                        <input type="tel" class="form-control " id="phone" name="phone" value="{{bittaa.phone}}">
+                    </div>
+                </div>
+                <!-- 3 dallaala--->
+                <div class="mb-2 row">
+                    <div class="col-3">
+                        <label for="dallaala" class="form-label">Bought From:</label>
+                    </div>
+                    <div class="col">
+                        <input type="dallaala" class="form-control" id="dallaala" name="dallaala"
+                            value="{{bittaa.dallaala}}">
                     </div>
                 </div>
                 <!-- 5 kilogram --->
@@ -72,7 +86,8 @@
                         <label for="kilogram" class="form-label">Kilogram:</label>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control " id="kilogram" name="kilogram" value="{{buy.kilogram}}">
+                        <input type="text" class="form-control " id="kilogram" name="kilogram"
+                            value="{{bittaa.kilogram}}">
                     </div>
                 </div>
                 <!-- 6 Amount in Birr --->
@@ -81,7 +96,7 @@
                         <label for="birr" class="form-label">Amount in Birr:</label>
                     </div>
                     <div class="col">
-                        <input type="birr" class="form-control " id="birr" name="birr" value="{{buy.birr}}">
+                        <input type="birr" class="form-control " id="birr" name="birr" value="{{bittaa.birr}}">
                     </div>
                 </div>
 
@@ -92,9 +107,9 @@
                     </div>
                     <div class="col">
                         <select class="form-select" id="status" name="status">
-                            <option value="Paid" {{#if (eq buy.status 'Paid' )}}selected{{/if}}>Paid
+                            <option value="Paid" {{#if (eq bittaa.status 'Paid' )}}selected{{/if}}>Paid
                             </option>
-                            <option value="Not-Paid" {{#if (eq buy.status 'Not-Paid' )}}selected{{/if}}>
+                            <option value="Not-Paid" {{#if (eq bittaa.status 'Not-Paid' )}}selected{{/if}}>
                                 Not-Paid
                             </option>
                         </select>
@@ -106,7 +121,7 @@
                         <label for="body" class="form-label">Note:</label>
                     </div>
                     <div class="col">
-                        <input type="body" class="form-control " id="body" name="body" value="{{buy.body}}">
+                        <input type="body" class="form-control " id="body" name="body" value="{{bittaa.body}}">
                     </div>
                 </div>
                 <!-- 9 Image--->
@@ -116,10 +131,11 @@
                     </div>
                     <div class="col">
                         <input type="file" class="form-control" id="image" name="image">
-                        {{#if buy.imageBase64}}
-                        <img src='data:{{buy.contentType}};base64,{{buy.imageBase64}}' alt="{{buy.name}}" width="100">
+                        {{#if bittaa.imageBase64}}
+                        <img src='data:{{bittaa.contentType}};base64,{{bittaa.imageBase64}}' alt="{{bittaa.name}}"
+                            width="100">
                         {{else}}
-                        <img src="images/no_image.png" alt="{{buy.name}}" width="100" class="img-thumbnail">
+                        <img src="images/no_image.png" alt="{{bittaa.name}}" width="100" class="img-thumbnail">
                         {{/if}}
                     </div>
                 </div>
@@ -127,7 +143,7 @@
                 <div class="mb-2" style="padding-left: 120px;">
                     <input style="padding-left: 10%; padding-right: 10%;" type="submit" value="Save"
                         class="btn btn-primary">
-                    <a style="padding-left: 10%; padding-right: 10%;" href="/buys" class="btn btn-warning">Cancel</a>
+                    <a style="padding-left: 10%; padding-right: 10%;" href="/bittaas" class="btn btn-warning">Cancel</a>
                 </div>
             </form>
         </div>

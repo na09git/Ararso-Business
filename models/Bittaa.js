@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const BuySchema = new mongoose.Schema({
-    buyer_name:
+const BittaaSchema = new mongoose.Schema({
+    name:
     {
         type: String,
         required: true,
@@ -16,6 +16,9 @@ const BuySchema = new mongoose.Schema({
         required: true,
     },
     phone: {
+        type: String,
+    },
+    dallaala: {
         type: String,
     },
     kilogram: {
@@ -51,4 +54,4 @@ const BuySchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Buy', BuySchema)
+module.exports = mongoose.model('Bittaa', BittaaSchema) 
