@@ -73,9 +73,10 @@
                     {{!-- 9 --}}
                     <p class="title" style="padding-bottom: 10px;">
                         <a href="/buy/{{row._id}}">
-                            <p>{{stripTags (truncate body 50)}}</p>
+                            <p>{{stripTags (truncate row.body 50)}}</p>
                         </a>
                     </p>
+
                     {{!-- 10 --}}
                     <div style="padding-left: 65px;">
                         <p class="card-title p-2 d-block " style="align-items:center;padding-left: 50px; padding-right: 40px;

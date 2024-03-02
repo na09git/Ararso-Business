@@ -4,15 +4,15 @@
             display: none;
         }
 
-        #content_print,
-        #content_print {
+        #content_p,
+        #content_p * {
             display: block;
         }
     }
 </style>
 
 <div class="pagetitle">
-    Odeeffannoo Gutuu Meshaa Bitamee
+    Odeeffannoo Gutuu Meeshaa Bitamee
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -23,9 +23,9 @@
 </div>
 
 <!-- End Page Title -->
-<div class="container" style="padding-top: 25px; padding-bottom: 20px;" id="content_print">
+<div class="container" style="padding-top: 25px; padding-bottom: 20px;" id="content_p">
 
-    <button id="print" class="btn  btn-primary link-unstyled text-decoration-none">
+    <button id="print" class="btn  btn-primary ">
         Print This Page
     </button>
     <div class="row">
@@ -40,6 +40,11 @@
                     </a>
                 </div>
             </div>
+            {{!-- 1
+            <div class="card ">
+                <img src="data:{{buy.contentType}};base64,{{buy.imageBase64}}" width="auto" height="300"
+                    class="buy image">
+            </div> --}}
 
             <div class="p-3 card buy">
                 <div class="card-content">
@@ -73,7 +78,7 @@
                         <span>◇ Dallaala :</span>
                         {{buy.dallaala}}</a>
                     </div>
-                    {{!-- 7 Kilo --}}
+                    {{!-- 7 kilo --}}
                     <div class="p-2" style="padding-left: 50px;">
                         <span>◇ kilo :</span>
                         {{buy.kilo}}
@@ -88,6 +93,7 @@
                         <span>◇ Yaadannoo :</span>
                         {{stripTags buy.body }}
                     </h6>
+
                     {{!-- 10 status --}}
                     <div class="p-2" style="padding-left: 50px;">
                         <span>◇ Haala Kaffalti : </span>
@@ -135,34 +141,13 @@
 
             </div>
 
-            <div class="card text-center">
-                <div class="card-content">
-                    <div style="padding-top: 10px;">
-                        <span class="card-title">{{buy.user.displayName}}</span>
-                    </div>
-                    <div style="padding: 7px;">
-                        <img src="{{buy.user.image}}" class="rounded-circle responsive-img img-small"
-                            alt="buy poster image" style="height: 150px; width: 150px;">
-                    </div>
-                    <hr>
-                    <div class="card-action" style="padding-bottom: 13px;">
-                        <button type="button" class="btn  btn-primary link-unstyled text-decoration-none"
-                            style="background-color: #3498db; border-color: #3498db; "
-                            onmouseover="this.style.backgroundColor='#2980b9'"
-                            onmouseout="this.style.backgroundColor='#3498db'"
-                            onclick="window.location.href='/buy/user/{{buy.user._id}}'">
-                            More From {{buy.user.firstName}}
-                        </button>
-                    </div>
 
-                </div>
-
-            </div>
         </div>
     </div>
 </div>
+
 <script>
-    const printBtn = document.getElementById('print')
+    const printBtn = document.getElementById('print');
 
     printBtn.addEventListener('click', function () {
         window.print();

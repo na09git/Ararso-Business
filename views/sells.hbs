@@ -40,7 +40,7 @@
                 <th class="text-center">Seller</th>
                 <th class="text-center">Buyer</th>
                 <th class="text-center">Material</th>
-                <th class="text-center">Kilogram</th>
+                <th class="text-center">Kilo</th>
                 <th class="text-center">Birr</th>
                 <th class="text-center">Note</th>
                 <th class="text-center">Phone</th>
@@ -74,12 +74,12 @@
                 <td style="padding: 2px;">{{row.buyer_name}}</td>
                 {{!-- 5 material --}}
                 <td style="padding: 2px;">{{row.material}}</td>
-                {{!-- 6 kilogram --}}
-                <td style="padding: 2px;">{{row.kilogram}}</td>
+                {{!-- 6 kilo --}}
+                <td style="padding: 2px;" class="text-center">{{row.kilo}}</td>
                 {{!-- 7 birr --}}
                 <td style="padding: 2px;">{{row.birr}}</td>
                 {{!-- 8 note --}}
-                <td style="padding: 2px;"> {{stripTags (truncate row.note 50)}}</td>
+                <td style="padding: 2px;"> {{stripTags (truncate row.body 50)}}</td>
                 {{!-- 9 phone --}}
                 <td style="padding: 2px;">{{row.phone}}</td>
                 {{!-- 10 status --}}

@@ -10,83 +10,98 @@
 </div>
 <!-- End Page Title -->
 
-<div class="row p-2 ">
-    <form action="/sell" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-        <!--- 1 seller name--->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="title" class="form-label" required> Kan-Gurgure </label>
-            <input type="name" class="form-control" id="seller" name="seller" placeholder="Enter Seller Name">
-        </div>
-        <!--- 2 buyer_name--->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="title" class="form-label" required> Nama-Nuraa-Bite </label>
-            <input type="name" class="form-control" id="buyer_name" name="buyer_name" placeholder="Enter Buyer Name">
+<!-- End Page Title -->
+<div class="container row " style="padding-top: 2%; padding-right:5%; padding-left:30px;">
+    <div class=" bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
+        style="padding-top: 20px; padding-right:10%; padding-left:10%;">
+
+        <div class="row text-center" style="align-items: center;">
+            <h3 class="bg-primary p-1" style="--bs-bg-opacity: .2; padding-left: 40px; padding-top: 70px;">
+                Meshaalee Bitamee Galmeessi</h3>
         </div>
 
-        <!--- 3 Material --->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto ">
-            <label for="material" class="form-label"> Meeshaa-Gurgurame </label>
-            <select class="form-select" id="material" name="material">
-                <option value="Dinicha" selected>Dinicha</option>
-                <option value="Karot">Karot</option>
-                <option value="Kurumba">Kurumba</option>
-                <option value="Qayasir">Qayasir</option>
-                <option value="Shunkurtaa">Shunkurtaa</option>
-                <option value="Shukaar">Shukaar</option>
-                <option value="Timaatim">Timaatim</option>
-                <option value="Luqqaa">Luqqaa</option>
-                <option value="Joniya">Joniya</option>
-                <option value="Car Material">Car Material</option>
-                <option value="Building Material">Building Material</option>
-                <option value=" Other">Other</option>
+        <div class="row p-2 ">
+            <form action="/sell" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <!--- 1 seller name--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="title" class="form-label" required> Kan-Gurgure </label>
+                    <input type="name" class="form-control" id="seller" name="seller" placeholder="Enter Seller Name">
+                </div>
+                <!--- 2 buyer_name--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="title" class="form-label" required> Nama-Nuraa-Bite </label>
+                    <input type="name" class="form-control" id="buyer_name" name="buyer_name"
+                        placeholder="Enter Buyer Name">
+                </div>
 
-            </select>
-        </div>
+                <!--- 3 Material --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto ">
+                    <label for="material" class="form-label"> Meeshaa-Gurgurame </label>
+                    <select class="form-select" id="material" name="material">
+                        <option value="Dinicha" selected>Dinicha</option>
+                        <option value="Karot">Karot</option>
+                        <option value="Kurumba">Kurumba</option>
+                        <option value="Qayasir">Qayasir</option>
+                        <option value="Shunkurtaa">Shunkurtaa</option>
+                        <option value="Shukaar">Shukaar</option>
+                        <option value="Timaatim">Timaatim</option>
+                        <option value="Luqqaa">Luqqaa</option>
+                        <option value="Joniya">Joniya</option>
+                        <option value="Car Material">Car Material</option>
+                        <option value="Building Material">Building Material</option>
+                        <option value=" Other">Other</option>
 
-        <!--- 4 kilo --->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="text" class="form-label ">Kilo</label>
-            <input type="text" class="form-control " id="kilo" name="kilo" placeholder="Enter kilo">
-        </div>
-        <!--- 5 birr--->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="text" class="form-label "> Birr</label>
-            <input type="text" class="form-control " id="birr" name="birr" placeholder="Enter Amount in Birr">
-        </div>
-        <!--- 6 Yaadannoo --->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="note" class="form-label ">Yaadannoo</label>
-            <input type="body" class="form-control " id="body" name="body" placeholder="Yaadannoo">
-        </div>
-        <!--- 7 Phone--->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="text" class="form-label ">Bilbila </label>
-            <input type="phone" class="form-control " id="phone" name="phone" placeholder="Enter Phone">
-        </div>
+                    </select>
+                </div>
 
-        <!--- 8 Image --->
-        <div class="mb-1 col-md-4 col-lg-6 col-xl-4 mx-auto">
-            <label for="image" class="form-label">Suuraa Filadhu</label>
-            <input type="file" class="form-control" id="image" name="image">
-        </div>
-        <!--- 9 status --->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto ">
-            <label for="status" class="form-label"> Haala Kaffalti</label>
-            <select class="form-select" id="status" name="status">
-                <option value="Paid" selected>Paid</option>
-                <option value="Not-Paid">Not-Paid</option>
-            </select>
-        </div>
-        <!--- 9 car_id--->
-        <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
-            <label for="text" class="form-label ">Targa Makinaa ( Car_id )</label>
-            <input type="text" class="form-control " id="car_id" name="car_id" placeholder="Enter car_id">
-        </div>
-        <!--- 10 Action --->
-        <div class="mb-3 col-md-6 col-lg-2 col-xl-4 mx-auto" style="padding-top: 10px;">
-            <button type="submit" class="btn btn-primary">+ Ida'i </button>
-            <a href="/sell" class="btn btn-warning">Irraa Debi'i</a>
-        </div>
+                <!--- 4 kilo --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="text" class="form-label ">Kilo</label>
+                    <input type="text" class="form-control " id="kilo" name="kilo" placeholder="Enter kilo">
+                </div>
+                <!--- 5 birr--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="text" class="form-label "> Birr</label>
+                    <input type="text" class="form-control " id="birr" name="birr" placeholder="Enter Amount in Birr">
+                </div>
+                <!--- 6 Yaadannoo --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="body" class="form-label">Yaadannoo</label>
+                    <textarea style="padding: 10px;" class="form-control" id="body" name="body"
+                        placeholder="Yaadannoo kee barreessi"></textarea>
+                </div>
 
-    </form>
+                <!--- 7 Phone--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="text" class="form-label ">Bilbila </label>
+                    <input type="phone" class="form-control " id="phone" name="phone" placeholder="Enter Phone">
+                </div>
+
+                <!--- 8 Image --->
+                <div class="mb-1 col-md-4 col-lg-6 col-xl-6 mx-auto">
+                    <label for="image" class="form-label">Suuraa Filadhu</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+                <!--- 9 status --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto ">
+                    <label for="status" class="form-label"> Haala Kaffalti</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="Paid" selected>Paid</option>
+                        <option value="Not-Paid">Not-Paid</option>
+                    </select>
+                </div>
+                <!--- 9 car_id--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="text" class="form-label ">Targa Makinaa ( Car_id )</label>
+                    <input type="text" class="form-control " id="car_id" name="car_id" placeholder="Enter car_id">
+                </div>
+                <!--- 10 Action --->
+                <div class="mb-3 col-md-6 col-lg-2 col-xl-6 mx-auto" style="padding-top: 10px;">
+                    <button type="submit" class="btn btn-primary">+ Ida'i </button>
+                    <a href="/sell" class="btn btn-warning">Irraa Debi'i</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>

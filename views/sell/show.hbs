@@ -1,3 +1,17 @@
+<style>
+    @media print {
+        body * {
+            display: none;
+        }
+
+        #content_p,
+        #content_p * {
+            display: block;
+        }
+    }
+</style>
+
+
 <div class="pagetitle">
     Odeeffannoo Gutuu Meshaa Gurguramee
     <nav>
@@ -9,8 +23,11 @@
     </nav>
 </div>
 <!-- End Page Title -->
+<button id="print" class="btn  btn-primary ">
+    Print This Page
+</button>
 
-<div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+<div class="container" style="padding-top: 20px; padding-bottom: 20px;" id="content_p">
     <div class="row">
         <div class="col-md-8" style="padding-right: 50px; padding-left: 50px;  padding-top: 5px;">
             <div class="row">
@@ -73,8 +90,11 @@
                     {{!--8 Note --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
                         <span>◇ Yaadannoo :</span>
-                        <span style="padding-left: 40px;">{{stripTags sell.note}}</span>
+                        <span style="padding-left: 40px;">
+                            {{stripTags sell.body}}
+                        </span>
                     </div>
+
                     {{!--9 status --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
                         <span>◇ Haala Kaffalti : </span>
@@ -125,3 +145,13 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    const printBtn = document.getElementById('print');
+
+    printBtn.addEventListener('click', function () {
+        window.print();
+    }
+    )
+</script>
