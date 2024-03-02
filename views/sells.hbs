@@ -28,20 +28,7 @@
 
 <div style="padding: 10px;">
     <h3 style="padding-top: 35px; padding-left: 38px;">Welcome {{name}}</h3>
-    <p style="padding-left: 20px"> This Are Number of Paid Vs Not-Paid </p>
 
-    <!-- Add these h6 tags where you want to display the counts -->
-    <span style="color: red;">|</span>
-    <h6 id="paidCount"></h6>
-    <span style="color: red;">|</span>
-    <h6 id="notPaidCount"></h6>
-    <span style="color: red;">|</span>
-    <h6 id="weeklyTotalBirr"></h6>
-    <span style="color: red;">|</span>
-    <h6 id="monthlyTotalBirr"></h6>
-    <span style="color: red;">|</span>
-    <h6 id="totalBirr"></h6>
-    <!-- Display total Birr amount here -->
 
     {{#if sell}}
     {{! Your existing table code }}
@@ -143,6 +130,24 @@
     {{else}}
     <p>No sell in Our School !</p>
     {{/if}}
+    <hr style="padding: 1px; color:red">
+
+
+    <p style="padding-left: 20px"> This Are Number of Paid Vs Not-Paid </p>
+
+    <!-- Add these h6 tags where you want to display the counts -->
+    <span style="color: red;">|</span>
+    <h6 id="paidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="notPaidCount"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="weeklyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="monthlyTotalBirr"></h6>
+    <span style="color: red;">|</span>
+    <h6 id="totalBirr"></h6>
+    <!-- Display total Birr amount here -->
+
 </div>
 
 

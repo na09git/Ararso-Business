@@ -1,9 +1,9 @@
 <div class="pagetitle">
-    <h1>Detail Sell</h1>
+    Odeeffannoo Gutuu Meshaa Gurguramee
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item">Sell</li>
+            <li class="breadcrumb-item">Gurgurtaa</li>
 
         </ol>
     </nav>
@@ -37,24 +37,24 @@
                 <div class="card-content">
                     {{!--2 Name --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Name :</span>
+                        <span>◇ Kan-Gurgure :</span>
                         <span style="padding-left: 40px;">{{sell.seller}}</span>
                     </div>
                     <hr>
                     {{!-- 3 buyer_name --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Material seller :</span>
+                        <span>◇ Nama-Nurraa-Bite:</span>
                         {{sell.buyer_name}}</a>
                     </div>
                     {{!--4 Material --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Material :</span>
+                        <span>◇ Meshaa-Gurgurame :</span>
                         {{sell.material}}</a>
                     </div>
                     {{!-- 5 Kilogram --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Kilogram :</span>
-                        {{sell.kilogram}}</a>
+                        <span>◇ Kilo :</span>
+                        {{sell.kilo}}</a>
                     </div>
                     {{!-- 6 Birr --}}
                     <div style="padding-left: 50px;  padding-top: 10px;  ">
@@ -63,7 +63,7 @@
                     </div>
                     {{!-- 7 phone --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Phone : </span>
+                        <span>◇ Bilbila : </span>
                         <span style="padding-left: 40px;">
                             <a href="tel:  {{sell.phone}} ">
                                 {{sell.phone}}
@@ -72,12 +72,12 @@
                     </div>
                     {{!--8 Note --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Note :</span>
+                        <span>◇ Yaadannoo :</span>
                         <span style="padding-left: 40px;">{{stripTags sell.note}}</span>
                     </div>
                     {{!--9 status --}}
                     <div style="padding-left: 50px;  padding-top: 10px;">
-                        <span>◇ Status : </span>
+                        <span>◇ Haala Kaffalti : </span>
                         <span
                             style="{{#eq sell.status 'Paid'}}color: #28a745;{{else}}color: #ff0000;{{/eq}}; padding-left: 40px;">
                             {{sell.status}}
@@ -85,7 +85,7 @@
                     </div>
                     {{!-- 10 car_id --}}
                     <div style="padding-left: 50px;  padding-top:  10px;">
-                        <span>◇ Car_id :</span>
+                        <span>◇ Targa Makinaa ( Car_id ) :</span>
                         {{sell.car_id}}</a>
                     </div>
                     {{!--11 Registered Date --}}

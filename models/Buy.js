@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const BittaaSchema = new mongoose.Schema({
+const BuySchema = new mongoose.Schema({
     name:
     {
         type: String,
@@ -21,7 +21,7 @@ const BittaaSchema = new mongoose.Schema({
     dallaala: {
         type: String,
     },
-    kilogram: {
+    kilo: {
         type: String,
     },
     birr: {
@@ -54,4 +54,4 @@ const BittaaSchema = new mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('Bittaa', BittaaSchema) 
+module.exports = mongoose.model('Buy', BuySchema) 

@@ -1,0 +1,110 @@
+<div class="pagetitle" style="padding-top: 10px;">
+    <h1>Meshaalee Haraa Bitaman Galmeessi</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Bittaa</li>
+            <li class="breadcrumb-item active">Meshaalee Bitaman</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- End Page Title -->
+<div class="container row " style="padding-top: 2%; padding-right:5%; padding-left:30px;">
+    <div class=" bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
+        style="padding-top: 20px; padding-right:10%; padding-left:10%;">
+
+        <div class="row text-center" style="align-items: center;">
+            <h3 class="bg-primary p-1" style="--bs-bg-opacity: .2; padding-left: 40px; padding-top: 70px;">
+                Meshaalee Bitamee Galmeessi</h3>
+        </div>
+
+        <div class="row p-2 ">
+            <form action="/buy" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <!--- 1 name--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="title" class="form-label" required>Kan-Bite</label>
+                    <input style="padding: 10px;" type="name" class="form-control" id="name" name="name"
+                        placeholder="nama bite">
+                </div>
+                <!--- 2 Material --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto ">
+                    <label for="material" class="form-label">Meshaa-Bitamtee</label>
+                    <select class="form-select" id="material" name="material">
+                        <option value="Dinicha" selected>Dinicha</option>
+                        <option value="Karot">Karot</option>
+                        <option value="Kurumba">Kurumba</option>
+                        <option value="Qayasir">Qayasir</option>
+                        <option value="Shunkurtaa">Shunkurtaa</option>
+                        <option value="Shukaar">Shukaar</option>
+                        <option value="Timaatim">Timaatim</option>
+                        <option value="Luqqaa">Luqqaa</option>
+                        <option value="Joniya">Joniya</option>
+                        <option value="Car Material">Car Material</option>
+                        <option value="Building Material">Building Material</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!--- 3 From_Seller--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label ">Nama-Meshaan-Iraa-Bitame</label>
+                    <input style="padding: 10px;" type="text" class="form-control " id="from_seller" name="from_seller"
+                        placeholder="nama meshaan iraa bitame barreessi">
+                </div>
+                <!--- 4 Phone--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label ">Bilbila</label>
+                    <input style="padding: 10px;" type="phone" class="form-control " id="phone" name="phone"
+                        placeholder="bilbila barreessi">
+                </div>
+
+                <!--- 5 dallaala--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label ">Dallaala</label>
+                    <input style="padding: 10px;" type="text" class="form-control " id="dallaala" name="dallaala"
+                        placeholder="dallaala meeshaa bitamtee">
+                </div>
+                <!--- 6 kilo --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label ">kilo</label>
+                    <input style="padding: 10px;" type="text" class="form-control " id="kilo" name="text"
+                        placeholder=" kilo barreessi">
+                </div>
+                <!--- 7 Birr --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label "> Birr</label>
+                    <input style="padding: 10px;" type="text" class="form-control " id="birr" name="birr"
+                        placeholder=" Amount in Birr barreessi">
+                </div>
+
+                <!--- 8 Image --->
+                <div class="mb-1 col-md-4 col-lg-6 col-xl-8 mx-auto">
+                    <label for="image" class="form-label">Suuraa Filadhuu</label>
+                    <input style="padding: 10px;" type="file" class="form-control" id="image" name="image">
+                </div>
+                <!--- 9 status --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto ">
+                    <label for="status" class="form-label">Haala Kaffalti</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="Paid" selected>Paid</option>
+                        <option value="Not-Paid">Not-Paid</option>
+                    </select>
+                </div>
+                <!--- 10 body --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-8 mx-auto">
+                    <label for="text" class="form-label ">Yaadannoo</label>
+                    <input style="padding: 10px;" type="text" class="form-control " id="body" name="body"
+                        placeholder="Yaadannoo kee barreessi">
+                </div>
+                <!--- 11 Action --->
+                <div class="mb-3 col-md-6 col-lg-2 col-xl-8 mx-auto" style="padding-top: 10px;">
+                    <button type="submit" class="btn btn-primary">+ Ida'i </button>
+                    <a href="/bought" class="btn btn-warning">Irraa Debi'i</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<!-- ====== Breadcrumbs ====== -->
+<div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <h2>Gabaasa</h2>
+                    <p> Gabaasa Keessan Dhabbata Araasootif asiitti gabaasu nidendeessuu .</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="container">
+            <ol>
+                <li><a href="/">Home</a></li>
+                <li>Gabaasa</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+
+<!--- End Breadcrumbs --->
+<div class="container row " style="padding-top: 2%; padding-right:5%; padding-bottom:5%; padding-left:60px;">
+    <div class=" bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
+        style="padding-top: 20px; padding-right:10%; padding-left:10%;">
+
+        <div class="row text-center" style="align-items: center;">
+            <h3 class="bg-primary p-1" style="--bs-bg-opacity: .2; padding-left: 40px; padding-top: 70px;">
+                Gabaasa Keessan Gabaasuf </h3>
+        </div>
+
+
+        <div class="row p-2 ">
+            <form action="/report" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+
+                <!--- 1 title --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto">
+                    <label for="title" class="form-label" required>Title :</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="title">
+                </div>
+
+                <!--- 2 status --->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-4 mx-auto ">
+                    <label for="status" class="form-label">Status :</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="Public" selected>Public</option>
+                        <option value="Private">Private</option>
+                    </select>
+                </div>
+                <!--- 3 Image --->
+                <div class="mb-1 col-md-4 col-lg-6 col-xl-4 mx-auto">
+                    <label for="image" class="form-label">Select Image :</label>
+                    <input type="file" class="form-control" id="image" name="image">
+                </div>
+                <!--- 4 body--->
+                <div class="mb-1 col-md-4 col-lg-2 col-xl-6 mx-auto">
+                    <label for="body" class="form-label">Report body :</label>
+                    <textarea class="form-control" id="body" name="body" required></textarea>
+                </div>
+                <!--- 8 Action --->
+                <div class="mb-3 col-md-6 col-lg-2 col-xl-4 mx-auto" style="padding-top: 10px;">
+                    <button type="submit" class="btn btn-primary">Add </button>
+                    <a href="/reports" class="btn btn-warning">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

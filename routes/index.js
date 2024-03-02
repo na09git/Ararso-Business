@@ -7,7 +7,7 @@ const User = require('../models/User')
 const Report = require('../models/Report')
 const News = require('../models/News')
 const Sell = require('../models/Sell')
-const Buy = require('../models/Bittaa')
+const Buy = require('../models/Buy')
 const Worker = require('../models/Worker')
 const Rent = require('../models/Rent')
 const Note = require('../models/Note')
@@ -26,7 +26,7 @@ router.get('/login', ensureGuest, (req, res) => {
 
 // @desc    home
 // @route   GET /home
-router.get('/', ensureAuth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     res.render('home')
     console.log("You are in / Page !");

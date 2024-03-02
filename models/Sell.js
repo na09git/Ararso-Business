@@ -14,14 +14,14 @@ const SellSchema = new mongoose.Schema({
         default: 'Dinicha',
         enum: ['Dinicha', 'Karot', 'Kurumba', 'Qayasir', 'Shunkurtaa', 'Shukaar', 'Timaatim', 'Luqqaa', 'Joniya', 'Other'],
     },
-    kilogram: {
+    kilo: {
         type: String,
     },
     birr: {
         type: String,
         required: true,
     },
-    note: {
+    body: {
         type: String,
     },
     phone: {

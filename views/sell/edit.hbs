@@ -1,10 +1,22 @@
+<div class="pagetitle">
+    Odeeffannoo  Meshaa Gurguramee Sirreessi
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Gurgurtaa</li>
+
+        </ol>
+    </nav>
+</div>
+<!-- End Page Title -->
+
 <div class="container row " style="padding-top: 6%; padding-right:4%; padding-left:10px;">
     <div class=" bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
         style="padding-top: 20px; padding-right:10%; padding-left:10%;">
 
         <div class="row text-center" style="align-items: center;">
             <h3 class="bg-primary p-1" style="--bs-bg-opacity: .2; padding-left: 40px; padding-top: 70px;">
-                Edit Selled Information</h3>
+                Odeeffannoo Bittaa Sirreessi </h3>
         </div>
 
         <div class="row " style="padding-left: 10px;">
@@ -13,7 +25,7 @@
                 <!-- 1 Name--->
                 <div class="mb-2 row" style="padding-top:20px;">
                     <div class="col-3">
-                        <label for="name" class="form-label"> Seller Name:</label>
+                        <label for="name" class="form-label"> Kan-Gurgure :</label>
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" id="seller" name="seller" value="{{sell.seller}}">
@@ -22,7 +34,7 @@
                 <!-- 2 buyer_name--->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="from_seller" class="form-label">Buyer Name:</label>
+                        <label for="from_seller" class="form-label">Nama-Nuraa-Bite :</label>
                     </div>
                     <div class="col">
                         <input type="buyer_name" class="form-control" id="buyer_name" name="buyer_name"
@@ -32,7 +44,7 @@
                 <!-- 3 Material -->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="material" class="form-label">Material:</label>
+                        <label for="material" class="form-label"> Meshaa-Gurgurame :</label>
                     </div>
                     <div class="col">
                         <select class="form-select" id="material" name="material">
@@ -61,21 +73,20 @@
 
                     </div>
                 </div>
-                <!-- 4 kilogram --->
+                <!-- 4 kilo --->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="kilogram" class="form-label">Kilogram:</label>
+                        <label for="kilo" class="form-label">Kilo:</label>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control " id="kilogram" name="kilogram"
-                            value="{{sell.kilogram}}">
+                        <input type="text" class="form-control " id="kilo" name="kilo" value="{{sell.kilo}}">
                     </div>
                 </div>
 
                 <!-- 5 Amount in Birr --->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="birr" class="form-label">Amount in Birr:</label>
+                        <label for="birr" class="form-label"> Birr:</label>
                     </div>
                     <div class="col">
                         <input type="birr" class="form-control " id="birr" name="birr" value="{{sell.birr}}">
@@ -84,7 +95,7 @@
                 <!-- 6 Note --->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="body" class="form-label">Note:</label>
+                        <label for="body" class="form-label">Yaadannoo :</label>
                     </div>
                     <div class="col">
                         <textarea class="form-control" id="body" name="note">{{sell.note}}</textarea>
@@ -94,7 +105,7 @@
                 <!-- 7 Phone --->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="phone" class="form-label">Phone :</label>
+                        <label for="phone" class="form-label">Bilbila :</label>
                     </div>
                     <div class="col">
                         <input type="tel" class="form-control " id="phone" name="phone" value="{{sell.phone}}">
@@ -103,7 +114,7 @@
                 <!-- 8 status --->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="status" class="form-label">Status :</label>
+                        <label for="status" class="form-label">Haala Kaffalti :</label>
                     </div>
                     <div class="col">
                         <select class="form-select" id="status" name="status">
@@ -128,7 +139,7 @@
                 <!-- 10 Image--->
                 <div class="mb-2 row">
                     <div class="col-3">
-                        <label for="image" class="form-label">Change Image :</label>
+                        <label for="image" class="form-label">Suuraa Filadhu :</label>
                     </div>
                     <div class="col">
                         <input type="file" class="form-control" id="image" name="image">

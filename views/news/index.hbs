@@ -7,7 +7,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
                         <h2>News</h2>
-                        <p>You can get new update about our school here .</p>
+                        <p>Oduu Dhaabbata keenyaan walqabatu asitti argattu.</p>
                     </div>
                 </div>
             </div>
@@ -53,21 +53,19 @@
             <div class="row gy-4 posts-list">
 
                 {{#each news as |row index| }}
-                <div class="col-xl-12 col-md-6">
-
+                <div class="col-xl-12 col-md-6" style="padding-top: 50px;">
                     <article>
                         <div class="text-center" style="padding-bottom: 30px;">
                             <p class="post-category">{{title}}</p>
                         </div>
 
-                        <div class="container" style="height: 300px;">
+                        <div class="container" style="height: auto;">
                             <div class="row">
-                                <div class="col-md-6" style="height: 300px;">
-                                    <div class="card mb-3" style="height: 300px; border: 0;">
+                                <div class="col-md-6">
+                                    <div class="card mb-3" style="border: 0;">
                                         {{#if imageBase64}}
                                         <img src='data:{{contentType}};base64,{{imageBase64}}'
                                             class="news-image img-fluid" style="min-height: 200px;">
-
                                         {{else}}
                                         <img src="images/no_image.png" class="img-thumbnail img-fluid"
                                             style="min-height: 200px;">
@@ -75,39 +73,33 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6" style="height: 300px;">
+                                <div class="col-md-6">
                                     <div class="card-body title">
                                         <a href="/news/{{_id}}">
                                             <p class="card-text">{{stripTags (truncate row.body 200)}}</p>
                                         </a>
                                     </div>
 
+                                    <div class="card-footer text-center" style="padding-top: 100px;">
+                                        <span>{{formatDate news.createdAt 'MMMM Do YYYY, h:mm:ss a'}}</span>
+                                    </div>
+
+                                    <div class="card-footer text-center"
+                                        style="padding-bottom: 30px; padding-top:50px;">
+                                        <a href="mailto: niletech1513@gmail.com">
+                                            <img src="{{user.image}}" alt="news image of{{user.firstName}}"
+                                                class="img-fluid post-author-img flex-shrink-0"
+                                                style=" border-radius:50%; ">
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
 
-
-                        <div class="d-flex align-items-center">
-
-                            <a href="mailto: niletech1513@gmail.com"> <img src="{{user.image}}"
-                                    alt="Story image of{{user.firstName}}"
-                                    class="img-fluid post-author-img flex-shrink-0"
-                                    style="height: 60px; width:60px; border-radius:50%;">
-                            </a>
-                            <div class="post-meta">
-
-                                <p class="post-date">
-                                    <time datetime="2022-01-01">
-                                        <div class="card-footer text-center" style="padding-top: 10px;">
-                                            <span style="padding-left: 40px;"> {{formatDate news.createdAt 'MMMM Do
-                                                YYYY, h:mm:ss a'}}</span>
-                                        </div>
-                                    </time>
-                                </p>
-                                <div class="card-footer text-center" style="padding-bottom: 30px;">
-                                    <a href="/news/{{_id}}" class="btn btn-secondary">Read More</a>
-                                </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="card-footer text-center">
+                                <a href="/news/{{_id}}" class="btn btn-secondary">Read More</a>
                             </div>
                         </div>
 
@@ -118,8 +110,8 @@
                 {{/each}}
                 <!-- End post list item -->
 
-
             </div>
+
             <!-- End blog posts list -->
 
         </div>

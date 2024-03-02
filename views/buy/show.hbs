@@ -1,3 +1,15 @@
+<div class="pagetitle">
+    Odeeffannoo Gutuu Meshaa Bitamee
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Bittaa</li>
+
+        </ol>
+    </nav>
+</div>
+
+<!-- End Page Title -->
 <div class="container" style="padding-top: 25px; padding-bottom: 20px;">
     <div class="row">
         <div class="col-md-8" style="padding-right: 50px; padding-left: 50px;">
@@ -21,47 +33,52 @@
                 <div class="card-content">
                     {{!--2 Name --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Name :</span>
+                        <span>◇ Kan-Bitee :</span>
                         <span style="padding-left: 40px;">{{buy.name}}</span>
                     </div>
                     <hr>
                     {{!--3 Material --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Material :</span>
+                        <span>◇ Meshaa-Bitamtee :</span>
                         {{buy.material}}</a>
                     </div>
                     {{!--4 from_seller --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Material is bought From (Seller) :</span>
+                        <span>◇ Nama-Iraa-Bitame :</span>
                         {{buy.from_seller}}</a>
                     </div>
                     {{!--5 phone --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Phone : </span>
+                        <span>◇ Bilbila : </span>
                         <span style="padding-left: 40px;">
                             <a href="tel:  {{buy.phone}} ">
                                 {{buy.phone}}
                             </a>
                         </span>
                     </div>
-                    {{!--6 Kilogram --}}
+                    {{!-- 6 dallaala --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Kilogram :</span>
-                        {{buy.kilogram}}
+                        <span>◇ Dallaala :</span>
+                        {{buy.dallaala}}</a>
                     </div>
-                    {{!--7 Birr --}}
+                    {{!-- 7 kilo --}}
+                    <div class="p-2" style="padding-left: 50px;">
+                        <span>◇ kilo :</span>
+                        {{buy.kilo}}
+                    </div>
+                    {{!-- 8 Birr --}}
                     <div class="p-2" style="padding-left: 50px;">
                         <span>◇ Birr :</span>
                         {{buy.birr}}</a>
                     </div>
-                    {{!--8 Note --}}
+                    {{!-- 9 Note --}}
                     <h6 class="p-2" style="padding-bottom: 10px;">
-                        <span>◇ Note :</span>
+                        <span>◇ Yaadannoo :</span>
                         {{stripTags body }}
                     </h6>
-                    {{!--9 status --}}
+                    {{!-- 10 status --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Status : </span>
+                        <span>◇ Haala Kaffalti : </span>
                         <h6 class="card-title p-2 d-block " style="align-items:center;padding-left: 50px; padding-right: 40px;
                         {{#eq buy.status 'Paid'}}background-color: #9EE47E;width: 100px;
                         {{else}}background-color: #FF3232; width: 100px;
@@ -71,7 +88,7 @@
                             </span>
                         </h6>
                     </div>
-                    {{!--10 Registered Date --}}
+                    {{!-- 11 Registered Date --}}
                     <div class="p-2" style="padding-left: 50px;">
                         <span>◇ Registered Date : </span>
                         <span style="padding-left: 40px;"> {{formatDate buy.createdAt 'MMMM Do YYYY, h:mm:ss
