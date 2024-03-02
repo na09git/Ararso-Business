@@ -161,7 +161,7 @@ router.post('/:id', ensureAuth, upload.single('image'), async (req, res) => {
 
         if (String(buy.user) !== req.user.id) {
             console.log('User not authorized');
-            return res.redirect('/buy'), {
+            return res.redirect('/bought'), {
                 layout: 'admin',
             }
         }
@@ -195,7 +195,7 @@ router.post('/:id', ensureAuth, upload.single('image'), async (req, res) => {
         );
 
         console.log('buy updated successfully');
-        res.redirect('/buy');
+        res.redirect('/bought');
     } catch (err) {
         console.error(err);
         return res.render('error/500');
