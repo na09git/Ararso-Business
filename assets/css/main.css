@@ -452,7 +452,7 @@ section {
   .navbar ul {
     position: absolute;
     inset: 0;
-    padding: 50px 0 10px 0;
+    padding: 50px 0 300px 0;
     margin: 0;
     background: rgba(14, 29, 52, 0.9);
     overflow-y: auto;
@@ -525,7 +525,7 @@ section {
     line-height: 0;
     transition: 0.5s;
     z-index: 9999;
-    margin-right: 10px;
+    margin-left: 140px;
   }
 
   .mobile-nav-hide {
