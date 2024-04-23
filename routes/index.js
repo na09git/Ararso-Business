@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 
 // @desc    home
 // @route   GET /home
-router.get('/home', ensureAuth, async (req, res) => {
+router.get('/home', async (req, res) => {
   try {
     res.render('home')
     console.log("You are in /home Page !");
