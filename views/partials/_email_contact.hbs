@@ -41,7 +41,13 @@
             </div>
 
             <div class="col-lg-8">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <form action="https://api.web3forms.com/submit" method="POST" role="form" class="email-form">
+                    <!-- Replace with your Access Key -->
+                    <input type="hidden" name="access_key" value="ed4fd839-7805-4ea7-bd53-e64e2c2cf1f1">
+                    <!-- Success Rediret to Web3Form -->
+                    <input type="hidden" name="redirect"
+                        value="https://web3forms.com/success?title=My%20Text&desc=Custom%20Description" />
+
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
@@ -60,14 +66,19 @@
                         <textarea class="form-control" name="message" rows="5" placeholder="Message"
                             required></textarea>
                     </div>
-                    <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div>
+
                     <div class="text-center"><button type="submit">Send Message</button></div>
+
                 </form>
-            </div><!-- End Contact Form -->
+                <script src="https://web3forms.com/client/script.js" async defer></script>
+                <script>
+                    window.onload = function () {
+                        // Reset the form fields when the page loads
+                        document.getElementById("form").reset();
+                    };
+                </script>
+            </div>
+            <!-- End Contact Form -->
 
         </div>
 
