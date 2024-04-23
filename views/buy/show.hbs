@@ -12,11 +12,11 @@
 </style>
 
 <div class="pagetitle">
-    Odeeffannoo Gutuu Meeshaa Bitamee
+    Full Information of Bought Material
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item">Bittaa</li>
+            <li class="breadcrumb-item">Buy </li>
 
         </ol>
     </nav>
@@ -50,23 +50,23 @@
                 <div class="card-content">
                     {{!--2 Name --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Kan-Bitee :</span>
+                        <span>◇ Buyer :</span>
                         <span style="padding-left: 40px;">{{buy.name}}</span>
                     </div>
                     <hr>
                     {{!--3 Material --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Meshaa-Bitamtee :</span>
+                        <span>◇ Bought Material:</span>
                         {{buy.material}}</a>
                     </div>
                     {{!--4 from_seller --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Nama-Iraa-Bitame :</span>
+                        <span>◇ Bought From :</span>
                         {{buy.from_seller}}</a>
                     </div>
                     {{!--5 phone --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Bilbila : </span>
+                        <span>◇ Phone : </span>
                         <span style="padding-left: 40px;">
                             <a href="tel:  {{buy.phone}} ">
                                 {{buy.phone}}
@@ -75,7 +75,7 @@
                     </div>
                     {{!-- 6 dallaala --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Dallaala :</span>
+                        <span>◇ Broker :</span>
                         {{buy.dallaala}}</a>
                     </div>
                     {{!-- 7 kilo --}}
@@ -90,13 +90,13 @@
                     </div>
                     {{!-- 9 Note --}}
                     <h6 class="p-2" style="padding-bottom: 10px;">
-                        <span>◇ Yaadannoo :</span>
+                        <span>◇ Note :</span>
                         {{stripTags buy.body }}
                     </h6>
 
                     {{!-- 10 status --}}
                     <div class="p-2" style="padding-left: 50px;">
-                        <span>◇ Haala Kaffalti : </span>
+                        <span>◇ Status : </span>
                         <h6 class="card-title p-2 d-block " style="align-items:center;padding-left: 50px; padding-right: 40px;
                         {{#eq buy.status 'Paid'}}background-color: #9EE47E;width: 100px;
                         {{else}}background-color: #FF3232; width: 100px;
